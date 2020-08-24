@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import Ingredient from './Ingredient';
 
-  const defaultIngredient = '';
   const defaultData = {
     'shared': false,
     'username': '',
@@ -12,7 +11,7 @@ import Ingredient from './Ingredient';
     'source': '',
     'servings': '',
     'prepTime': '',
-    'ingredients': [defaultIngredient],
+    'ingredients': [''],
     'directions': '',
   }
 
