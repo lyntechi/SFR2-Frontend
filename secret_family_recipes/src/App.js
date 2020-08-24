@@ -8,9 +8,14 @@ import RecipeForm from './components/RecipeForm';
 
 function App() {
   return (
+    <>
     <div className="App">
      hello world
     </div>
+    
+    <Signup />
+    <Login />
+    </>
   );
 }
 

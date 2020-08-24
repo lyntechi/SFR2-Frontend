@@ -13,7 +13,6 @@ const initialFormErrors = {
     password: '',
 }
 
-const initialUser = []
 const initialDisabled = true
 
 export default function LoginForm(){
@@ -40,7 +39,8 @@ export default function LoginForm(){
     }
 
     // YUP VALIDATIONS
-    const inputChange = (name, value) => {
+    const inputChange = (evt) => {
+        const {name, value } = evt.target
         yup
         .reach(validationSchema, name)
         .validate(value)
