@@ -14,11 +14,11 @@ const initialFormErrors = {
     password: '',
 }
 
-// const initialUser = []
+const initialUser = []
 const initialDisabled = true
 
 export default function SignupForm(){
-    // const [users, setUsers] = useState(initialUser)
+    const [users, setUsers] = useState(initialUser)
     const [formValues, setFormValues] = useState(initialFormValues)
     const [errors, setErrors] = useState(initialFormErrors)
     const [disabled, setDisabled] = useState(initialDisabled)
@@ -42,7 +42,9 @@ export default function SignupForm(){
     };
 
     // YUP VALIDATIONS
-    const inputChange = (name, value) => {
+    const inputChange = (evt) => {
+        const {name, value } = evt.target
+        
         yup
         .reach(validationSchema, name)
         .validate(value)

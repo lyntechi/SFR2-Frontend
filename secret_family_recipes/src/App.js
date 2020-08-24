@@ -6,9 +6,14 @@ import Validations from './components/validation/validationSchema';
 
 function App() {
   return (
+    <>
     <div className="App">
      hello world
     </div>
+    
+    <Signup />
+    <Login />
+    </>
   );
 }
 
