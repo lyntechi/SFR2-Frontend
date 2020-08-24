@@ -1,6 +1,10 @@
-import react, {useState} from 'React';
+import React, {useState} from 'react';
 
+import Ingredient from './Ingredient';
+
+  const defaultIngredient = '';
   const defaultData = {
+    'shared': false,
     'username': '',
     'photo': '',
     'title': '',
@@ -8,46 +12,132 @@ import react, {useState} from 'React';
     'source': '',
     'servings': '',
     'prepTime': '',
-    'ingredients': [''],
+    'ingredients': [defaultIngredient],
     'directions': '',
-    'baking-temp': '',
   }
 
 export default function RecipeForm () {
   const [formData, setFormData] = useState(defaultData);
   
+
+  //helper function for updating Ingredients array
+  function newIngredients(key, value) {
+    const result = [...formData.ingredients]
+    result[key]= value;
+    console.log(result);
+    return result;
+  }
+
+  function updateForm(e) {
+    const {name, value} = e.target;
+    if (!isNaN(name)) { //if the name is a number, it's the index of the
+                        //ingredients array
+      setFormData({...formData,
+                    'ingredients': newIngredients(name, value)
+                  })            
+    }
+    setFormData({...formData, [name]: value})
+  }
+  //Network Request
+  function submit(e) {
+    e.preventDefault()
+    ///////////////
+    //POST REQUEST 
+    ///////////////
+  }
+
+  //add additional input fields for ingredients
+  function addIngredient(e) {
+    e.preventDefault();
+    setFormData({...formData,
+      ingredients: [...formData.ingredients, '']})
+  }
+
   return (
-    <form>
+    <form className='recipeform' >
       <div className='meta'>
         <label>Recipe Title:&nbsp;
-          <input type='text'></input>
+          <input type='text'
+                 name='title'
+                 value={formData.title}
+                 onChange={updateForm}
+          />
         </label>
         <label>Category:&nbsp;
-          <input type='text'></input> 
+          <input type='text'
+                 name='category'
+                 value={formData.category}
+                 onChange={updateForm}
+          />
         </label>
         <label>Source:&nbsp;
-          <input type='text'></input>
+          <input type='text'
+                 name='source'
+                 value={formData.source}
+                 onChange={updateForm}
+          />
         </label>       
         <label>Servings:&nbsp;
-          <input type='number'></input>
+          <input type='number'
+                 name='servings'
+                 value={formData.servings}
+                 onChange={updateForm}
+          />
         </label>
-        <label>Preparation Time:
-          <input type='text'></input>
+        <label>Preparation Time:&nbsp;
+          <input type='text'
+                 name='prepTime'
+                 value={formData.prepTime}
+                 onChange={updateForm}
+          />
         </label>
       </div>
       <div className='ingredients'>
         <label>Ingredients:&nbsp;
-          <Ingredient />
+          {/*<Ingredient />*/}
+          {formData.ingredients.map((item, index) => {
+            return (
+              <Ingredient ingredient={item}
+                          updateForm={updateForm}
+                          add={addIngredient}
+                          key={index}
+                          name={index}
+              />
+              
+            )
+          })
+          }
+        <button onClick={addIngredient}>Add</button>
         </label>
       </div>
       <div className='directions'>
         <label>Directions:&nbsp;
-          <input type='text'></input>
-        </label>
-        <label>Temperature&nbsp;
-          <input type='text'></input>
+          <textarea rows='7'
+                    cols='80'
+                    name='directions'
+                    value={formData.directions}
+                    onChange={updateForm}
+          />
         </label>
       </div>
+      <div className='submission'>
+        <h3>Sharing:</h3>
+        <label>Public:
+          <input name='shared'
+                 type="radio"
+                 checked={formData.shared}
+                 onChange={() => setFormData({...formData, shared: true})}
+          />
+        </label>
+        <label>Private:
+        <input name='shared'
+               type="radio"
+               checked={!formData.shared}
+               onChange={() => setFormData({...formData, shared: false})}
+        />
+        </label>
+      </div>
+      <button onClick={submit} >Add Recipe</button>
     </form>
   )
 }
