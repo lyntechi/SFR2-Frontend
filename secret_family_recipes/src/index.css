@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.recipeform {
+  margin: auto;
+  max-width: 600px;
+}
+
+.recipeform label {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin: .5em;
+}
