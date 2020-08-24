@@ -8,13 +8,12 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers/rootReducer";
 import "./index.css";
 import App from "./App";
+import './index.css';
+
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 
 
 ReactDOM.render(
