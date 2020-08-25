@@ -36,6 +36,7 @@ function App(props) {
         <Route path="/signup" component={Signup} />
         <Route path="/logout" component={LogOutPage} />
       </Switch>
+      <RecipeForm />
     </div>
   );
 }
