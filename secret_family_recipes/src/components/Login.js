@@ -28,7 +28,7 @@ export default function LoginForm() {
     axiosWithAuth()
       .post("/api/users/login ", login)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
       });
     const userLogin = {
