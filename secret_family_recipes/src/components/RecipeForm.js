@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 
-import recipeSchema from "../validation/RecipeSchema";
-import Ingredient from "./Ingredient";
+import recipeSchema from './validation/RecipeSchema';
+import Ingredient from './Ingredient';
 
-const defaultData = {
-  shared: false,
-  username: "",
-  photo: "",
-  title: "",
-  category: "",
-  source: "",
-  servings: "",
-  prepTime: "",
-  ingredients: [""],
-  directions: "",
-};
+  const defaultData = {
+    'shared': false,
+    'photo': '',
+    'title': '',
+    'categories': [],
+    'source': '',
+    'ingredients': [{ingredient: '', quantity: ''}],
+    'instructions': [],
+  }
+
+
 
 export default function RecipeForm() {
   const [formData, setFormData] = useState(defaultData);
@@ -146,15 +145,13 @@ export default function RecipeForm() {
           <button onClick={addIngredient}>Add</button>
         </label>
       </div>
-      <div className="directions">
-        <label>
-          Directions:&nbsp;
-          <textarea
-            rows="7"
-            cols="80"
-            name="directions"
-            value={formData.directions}
-            onChange={updateForm}
+      <div className='instructions'>
+        <label>instructions:&nbsp;
+          <textarea rows='7'
+                    cols='80'
+                    name='instructions'
+                    value={formData.instructions}
+                    onChange={updateForm}
           />
         </label>
       </div>
@@ -182,7 +179,7 @@ export default function RecipeForm() {
       <p>{formErrors.title}</p>
       <p>{formErrors.category}</p>
       <p>{formErrors.ingredients}</p>
-      <p>{formErrors.directions}</p>
+      <p>{formErrors.instructions}</p>
 
       <button disabled={disabled} onClick={submit}>
         Add Recipe

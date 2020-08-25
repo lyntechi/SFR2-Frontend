@@ -16,9 +16,9 @@ const recipeSchema = yup.object().shape({
     .array()
     .min(2, "You must include at least one Ingredient")
     .required("Ingredients are required"),
-  directions: yup
+  instructions: yup
     .string()
-    .min(1, "you must include Directions for your recipe"),
+    .min(1, "you must include instructions for your recipe"),
 });
 
 export default recipeSchema;

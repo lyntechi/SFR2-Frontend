@@ -20,7 +20,7 @@ export const recipesReducer = (state = initialState, action) => {
     case UPDATE_RECIPES:
       return {
         ...state,
-        plants: action.payload,
+        recipes: action.payload,
         message: "",
         makingChanges: false,
       };
