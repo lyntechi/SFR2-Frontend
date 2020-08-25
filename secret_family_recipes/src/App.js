@@ -23,8 +23,6 @@ function App(props) {
   }, []);
   return (
     <div className="App">
-      {/* TODO: delete AllRecipes component! */}
-      <AllRecipes /> 
       <header>
         <Header />
       </header>
