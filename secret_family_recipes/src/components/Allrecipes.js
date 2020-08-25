@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import Header from "./components/Header.js"; // needs to navigate to signup/login pages
 // import RecipeCards from ' ' // need to import recipe component 
 import axios from 'axios';
-
+import { getRecipes } from '../actions/recipesActions';
 // This page will render a search bar at the top and recipe cards below
 // TO-DO:
 // 1. import Allrecipes.js into Header and App? -- make a link in navbar
@@ -13,24 +13,20 @@ import axios from 'axios';
 
 const searchBarValue = ' ';
 
-export default function AllRecipes() {
-    const [allRecipes, setAllRecipes] = useState([]);
+export default function AllRecipes(props) {
     const [searchBar, setSearchBar] = useState(searchBarValue);
     
-    // useEffect(() => {
-    //     axios.get('')
-    //     .then(res => {
-    //         // setAllRecipes to data from res?
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-    // }, []);
-
-    // Filter Function
+    // Filter onChange Function
     // const onRecipeFilterChange = (evt) => {
 
     // }
+
+    // Filtered results
+    const filteredRecipes = 
+        allRecipes.filter(recipe => {
+            return recipe.title.toLowerCase().includes()
+    })
+
 
     return (
         <>
@@ -43,7 +39,7 @@ export default function AllRecipes() {
             />
         </label>
         <div className='recipes container'>
-            
+            {props.recipes.map}
         </div>
         </>
     )
