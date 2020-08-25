@@ -23,13 +23,7 @@ export default function SignupForm() {
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
-  // const getUsers = () => {
-  //     axios.get('')
-  // }
-
-  // const postNewUser = newUser => {
-  //     axios.post('', newUser)
-  // }
+ 
 
   // FORM FUNCTIONS
   const onSubmit = (evt) => {
@@ -37,7 +31,8 @@ export default function SignupForm() {
     axiosWithAuth()
       .post("/api/users/register", formValues)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        console.log('token', res)
+        localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
       });
     const newUser = {

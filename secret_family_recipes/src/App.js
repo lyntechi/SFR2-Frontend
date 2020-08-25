@@ -11,6 +11,8 @@ import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
 import RecipeCard from './components/RecipeCard';
+import AllRecipes from "./components/Allrecipes";
+
 
 function App(props) {
   useEffect(() => {
@@ -22,6 +24,8 @@ function App(props) {
   }, []);
   return (
     <div className="App">
+      {/* TODO: delete AllRecipes component! */}
+      <AllRecipes /> 
       <header>
         <Header />
       </header>
