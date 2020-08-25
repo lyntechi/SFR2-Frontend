@@ -16,6 +16,9 @@ function Header(props) {
           <Link to="/signup" id="signUpLink">
             <h2>Sign Up</h2>
           </Link>
+          <Link to="/allrecipes" id="allRecipesLink">
+            <h2>Recipes</h2>
+          </Link>
         </>
       )}
       {props.loggedIn && (
