@@ -38,7 +38,9 @@ function AllRecipes(props) {
           // onChange={onRecipeFilterChange}
         />
       </label>
-      <div className="recipes container">{props.recipes.map}</div>
+      <div className="recipes container">{props.recipes.map() => {
+          <RecipeCard />
+      }}</div>
     </>
   );
 }
