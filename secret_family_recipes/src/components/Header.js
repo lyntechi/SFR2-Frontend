@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 function Header(props) {
+
+
   return (
     <header>
       {!props.loggedIn && (
