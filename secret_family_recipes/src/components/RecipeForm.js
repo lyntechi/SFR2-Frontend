@@ -1,20 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from 'yup';
 
-import recipeSchema from '../validation/RecipeSchema';
+import recipeSchema from './validation/RecipeSchema';
 import Ingredient from './Ingredient';
 
   const defaultData = {
     'shared': false,
-    'username': '',
     'photo': '',
     'title': '',
-    'category': '',
+    'categories': [],
     'source': '',
-    'servings': '',
-    'prepTime': '',
-    'ingredients': [''],
-    'directions': '',
+    'ingredients': [{ingredient: '', quantity: ''}],
+    'instructions': [],
   }
 
 
@@ -107,20 +104,6 @@ export default function RecipeForm () {
                  onChange={updateForm}
           />
         </label>       
-        <label>Servings:&nbsp;
-          <input type='number'
-                 name='servings'
-                 value={formData.servings}
-                 onChange={updateForm}
-          />
-        </label>
-        <label>Preparation Time:&nbsp;
-          <input type='text'
-                 name='prepTime'
-                 value={formData.prepTime}
-                 onChange={updateForm}
-          />
-        </label>
       </div>
       <div className='ingredients'>
         <label>Ingredients:&nbsp;
@@ -140,12 +123,12 @@ export default function RecipeForm () {
         <button onClick={addIngredient}>Add</button>
         </label>
       </div>
-      <div className='directions'>
-        <label>Directions:&nbsp;
+      <div className='instructions'>
+        <label>instructions:&nbsp;
           <textarea rows='7'
                     cols='80'
-                    name='directions'
-                    value={formData.directions}
+                    name='instructions'
+                    value={formData.instructions}
                     onChange={updateForm}
           />
         </label>
@@ -170,7 +153,7 @@ export default function RecipeForm () {
       <p>{formErrors.title}</p>
       <p>{formErrors.category}</p>
       <p>{formErrors.ingredients}</p>
-      <p>{formErrors.directions}</p>
+      <p>{formErrors.instructions}</p>
       
       <button disabled={disabled} onClick={submit} >Add Recipe</button>
     </form>
