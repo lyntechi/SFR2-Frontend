@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from 'yup';
 
-import recipeSchema from '../validation/RecipeSchema';
+import recipeSchema from './validation/RecipeSchema';
 import Ingredient from './Ingredient';
 
   const defaultData = {
