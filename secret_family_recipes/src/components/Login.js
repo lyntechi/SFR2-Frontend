@@ -33,7 +33,7 @@ export default function LoginForm() {
   const onLoginSubmit = (evt) => {
     evt.preventDefault();
     axiosWithAuth()
-      .post("api/auth/login", login)
+      .post("/api/users/login ", login)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         history.push("/recipes");

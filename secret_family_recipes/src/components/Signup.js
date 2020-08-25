@@ -35,7 +35,7 @@ export default function SignupForm() {
   const onSubmit = (evt) => {
     evt.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/register", formValues)
+      .post("/api/users/register", formValues)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         history.push("/recipes");
