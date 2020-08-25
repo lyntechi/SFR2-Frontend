@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { Route, Switch } from "react-router-dom";
 import LogOutPage from "./components/LogOutPage.js";
 import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
+import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
 
 function App(props) {
@@ -24,6 +25,7 @@ function App(props) {
         <Header />
       </header>
       <Switch>
+        <RedirectRoute exact path="/" />
         <PrivateRoute exact path="/recipes" component={RecipeForm} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
