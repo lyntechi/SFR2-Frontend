@@ -6,15 +6,12 @@ import Ingredient from './Ingredient';
 
   const defaultData = {
     'shared': false,
-    'username': '',
     'photo': '',
     'title': '',
     'category': '',
     'source': '',
-    'servings': '',
-    'prepTime': '',
     'ingredients': [''],
-    'directions': '',
+    'instructions': '',
   }
 
 
@@ -140,12 +137,12 @@ export default function RecipeForm () {
         <button onClick={addIngredient}>Add</button>
         </label>
       </div>
-      <div className='directions'>
-        <label>Directions:&nbsp;
+      <div className='instructions'>
+        <label>instructions:&nbsp;
           <textarea rows='7'
                     cols='80'
-                    name='directions'
-                    value={formData.directions}
+                    name='instructions'
+                    value={formData.instructions}
                     onChange={updateForm}
           />
         </label>
@@ -170,7 +167,7 @@ export default function RecipeForm () {
       <p>{formErrors.title}</p>
       <p>{formErrors.category}</p>
       <p>{formErrors.ingredients}</p>
-      <p>{formErrors.directions}</p>
+      <p>{formErrors.instructions}</p>
       
       <button disabled={disabled} onClick={submit} >Add Recipe</button>
     </form>
