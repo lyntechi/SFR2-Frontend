@@ -1,4 +1,4 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
 const recipeSchema = yup.object().shape({
   shared: yup.boolean(),
@@ -10,10 +10,8 @@ const recipeSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, "Title must be at least 3 characters long.")
-    .required("A Title is Required"), 
-  category: yup
-    .string()
-    .required("Must Include a category"),
+    .required("A Title is Required"),
+  category: yup.string().required("Must Include a category"),
   ingredients: yup
     .array()
     .min(2, "You must include at least one Ingredient")
@@ -25,4 +23,4 @@ const recipeSchema = yup.object().shape({
 
 export default recipeSchema;
 
- //   .notOneOf(["waffle@syrup.com"], "That email is already Taken.")
+//   .notOneOf(["waffle@syrup.com"], "That email is already Taken.")

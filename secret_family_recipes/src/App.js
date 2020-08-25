@@ -12,7 +12,6 @@ import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
 import AllRecipes from "./components/Allrecipes";
 
-
 function App(props) {
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -24,7 +23,7 @@ function App(props) {
   return (
     <div className="App">
       {/* TODO: delete AllRecipes component! */}
-      <AllRecipes /> 
+      <AllRecipes />
       <header>
         <Header />
       </header>

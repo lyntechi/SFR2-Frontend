@@ -23,7 +23,6 @@ export default function SignupForm() {
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
- 
 
   // FORM FUNCTIONS
   const onSubmit = (evt) => {
@@ -31,7 +30,7 @@ export default function SignupForm() {
     axiosWithAuth()
       .post("/api/users/register", formValues)
       .then((res) => {
-        console.log('token', res)
+        console.log("token", res);
         localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
       });
