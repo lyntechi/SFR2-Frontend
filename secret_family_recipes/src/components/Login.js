@@ -21,13 +21,6 @@ export default function LoginForm() {
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
-  // const getUsers = () => {
-  //     axios.get('')
-  // }
-
-  // const postNewUser = newUser => {
-  //     axios.post('', newUser)
-  // }
 
   // FORM FUNCTIONS
   const onLoginSubmit = (evt) => {

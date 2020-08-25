@@ -10,6 +10,7 @@ import LogOutPage from "./components/LogOutPage.js";
 import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
+import AllRecipes from "./components/Allrecipes";
 
 
 function App(props) {
@@ -22,6 +23,8 @@ function App(props) {
   }, []);
   return (
     <div className="App">
+      {/* TODO: delete AllRecipes component! */}
+      <AllRecipes /> 
       <header>
         <Header />
       </header>
