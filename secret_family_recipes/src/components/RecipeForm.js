@@ -8,10 +8,10 @@ import Ingredient from './Ingredient';
     'shared': false,
     'photo': '',
     'title': '',
-    'category': '',
+    'categories': [],
     'source': '',
-    'ingredients': [''],
-    'instructions': '',
+    'ingredients': [{ingredient: '', quantity: ''}],
+    'instructions': [],
   }
 
 
@@ -104,20 +104,6 @@ export default function RecipeForm () {
                  onChange={updateForm}
           />
         </label>       
-        <label>Servings:&nbsp;
-          <input type='number'
-                 name='servings'
-                 value={formData.servings}
-                 onChange={updateForm}
-          />
-        </label>
-        <label>Preparation Time:&nbsp;
-          <input type='text'
-                 name='prepTime'
-                 value={formData.prepTime}
-                 onChange={updateForm}
-          />
-        </label>
       </div>
       <div className='ingredients'>
         <label>Ingredients:&nbsp;
