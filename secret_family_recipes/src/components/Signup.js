@@ -37,7 +37,8 @@ export default function SignupForm() {
     axiosWithAuth()
       .post("/api/users/register", formValues)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        console.log('token', res)
+        localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
       });
     const newUser = {
