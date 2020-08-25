@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-
+import RecipeCard from "./RecipeCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 // This page will render a search bar at the top and recipe cards below
 // TO-DO:
 // 1. import Allrecipes.js into Header and App? -- make a link in navbar
@@ -18,10 +19,22 @@ const searchBarValue = " ";
 function AllRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
 
-  // Filter onChange Function
-  // const onRecipeFilterChange = (evt) => {
+    // Getting all public recipe cards 
+  useEffect(()=> {
+      axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes')
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+          console.log(err)
+      })
+  })
 
-  // }
+
+  // Filter onChange Function
+//   const onRecipeFilterChange = (evt) => {
+//     const { } = evt.target
+//   }
 
   // Filtered results
 //   const filteredRecipes = allRecipes.filter((recipe) => {
@@ -38,9 +51,11 @@ function AllRecipes(props) {
           // onChange={onRecipeFilterChange}
         />
       </label>
-      <div className="recipes container">{props.recipes.map() => {
-          <RecipeCard />
-      }}</div>
+      <div className="recipes container">
+          {props.recipes.map((item) => {
+          return <RecipeCard item={item} />
+      })}
+      </div>
     </>
   );
 }

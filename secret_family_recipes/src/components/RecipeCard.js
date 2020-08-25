@@ -11,7 +11,7 @@ export default function RecipeCard(props) {
        source,
        ingredients,
        instructions,
-       editable} = props; //pass editable as true to have an edit button
+       editable} = props.item; //pass editable as true to have an edit button
 
   const [edit, setEdit] = useState(false);
 
