@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import * as yup from 'yup';
 
+import recipeSchema from '../validation/RecipeSchema';
 import Ingredient from './Ingredient';
 
   const defaultData = {
@@ -18,7 +20,34 @@ import Ingredient from './Ingredient';
 
 export default function RecipeForm () {
   const [formData, setFormData] = useState(defaultData);
+  const [formErrors, setFormErrors] = useState(['']);
+  const [disabled, setDisabled] = useState(false);
   
+  const throwErrors = (name, value) => {
+    yup
+      .reach(recipeSchema, name)
+      .validate(value)
+      .then(valid => {
+        setFormErrors({
+          ...formErrors,
+          [name]: ""
+        });
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0]
+        });
+      });
+ }
+
+  //catch changes and validate. Disable/Enable submit button accordingly
+  useEffect(() => {
+    recipeSchema.isValid(formData).then(valid => {
+    setDisabled(!valid);
+    })
+  }, [formData])
+
 
   //helper function for updating Ingredients array
   function newIngredients(key, value) {
@@ -36,6 +65,7 @@ export default function RecipeForm () {
                     'ingredients': newIngredients(name, value)
                   })            
     }
+    throwErrors(name, value);
     setFormData({...formData, [name]: value})
   }
   //Network Request
@@ -137,7 +167,12 @@ export default function RecipeForm () {
         />
         </label>
       </div>
-      <button onClick={submit} >Add Recipe</button>
+      <p>{formErrors.title}</p>
+      <p>{formErrors.category}</p>
+      <p>{formErrors.ingredients}</p>
+      <p>{formErrors.directions}</p>
+      
+      <button disabled={disabled} onClick={submit} >Add Recipe</button>
     </form>
   )
 }

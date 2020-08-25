@@ -11,6 +11,7 @@ import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
 
+
 function App(props) {
   useEffect(() => {
     if (localStorage.getItem("token")) {
