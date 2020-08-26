@@ -8,11 +8,14 @@ const recipeSchema = yup.object().shape({
     .string()
     .min(3, "Title must be at least 3 characters long.")
     .required("A Title is Required"),
-  categories: yup.array().required("Must Include a category"),
+  categories: yup.array().of(
+    yup.string().required('you must include a category')),
   ingredients: yup
-    .array()
-    .min(1, "You must include at least one Ingredient")
-    .required("Ingredients are required"),
+    .array().of(
+      yup.object().shape({
+        quantity: yup.string().required('must include a quantity'),
+        ingredient: yup.string().required('you must include an ingredient')
+      })),
   instructions: yup
     .array()
     .min(1, "you must include instructions for your recipe"),

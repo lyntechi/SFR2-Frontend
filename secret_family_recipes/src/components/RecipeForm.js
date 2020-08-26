@@ -89,6 +89,7 @@ const defaultData = {
   useEffect(() => {
     recipeSchema.isValid(formData).then((valid) => {
       setDisabled(!valid);
+      console.log(formErrors);
     });
   }, [formData]);
   //END VALIDATION
@@ -183,7 +184,7 @@ const defaultData = {
         </label>
       </div>
       <p>{formErrors.title}</p>
-      <p>{formErrors.category}</p>
+      <p>{formErrors.categories}</p>
       <p>{formErrors.ingredients}</p>
       <p>{formErrors.instructions}</p>
 
