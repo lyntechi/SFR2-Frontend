@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import RecipeCard from './RecipeCard';
+import RecipeCard from "./RecipeCard";
 import axios from "axios";
-import { getRecipes } from "../actions/recipesActions";
+import { getRecipes, addRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
@@ -11,31 +11,19 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const searchBarValue = " ";
 
-export default function AllRecipes(props) {
+function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState([])
-
-    // Getting all User's recipe cards 
-  useEffect(()=> {
-      axios.get('') // LYNDA's CODE HERE
-      .then(res => {
-        setUserRecipeList(res.data.data) 
-        console.log(res.data.data)
-      })
-      .catch(err => {
-          console.log(err)
-      })
-  }, [])
+  const [userRecipeList, setUserRecipeList] = useState([]);
 
   // For SEARCHBAR: Filter onChange Function
-//   const onRecipeFilterChange = (evt) => {
-//     const { } = evt.target
-//   }
+  //   const onRecipeFilterChange = (evt) => {
+  //     const { } = evt.target
+  //   }
 
   // For SEARCHBAR: Filtered results
-//   const filteredRecipes = allRecipes.filter((recipe) => {
-//     return recipe.title.toLowerCase().includes();
-//   });
+  //   const filteredRecipes = allRecipes.filter((recipe) => {
+  //     return recipe.title.toLowerCase().includes();
+  //   });
 
   return (
     <>
@@ -48,15 +36,31 @@ export default function AllRecipes(props) {
         />
       </label>
       <div className="recipes container">
-          {recipeList.map((item) => {
-          return <RecipeCard item={item} />
-      })}
+        {props.recipes.map((item) => {
+          return (
+            <RecipeCard
+              item={item}
+              key={item.id}
+              makingChanges={props.makingChanges}
+            />
+          );
+        })}
       </div>
 
-      <div className='recipe form'>
-          <RecipeForm />
+      <div className="recipe form">
+        <RecipeForm />
       </div>
     </>
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    recipes: state.recipesReducer.recipes,
+    makingChanges: state.recipesReducer.makingChanges,
+  };
+};
+
+export default connect(mapStateToProps, { getRecipes, addRecipes })(
+  UserRecipes
+);

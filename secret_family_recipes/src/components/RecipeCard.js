@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import RecipeForm from './RecipeForm';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core';
+import {deleteRecipes,editRecipes,getRecipes} from "../actions/recipesActions";
+import { connect } from "react-redux";
 
 
 export default function RecipeCard(props) {
@@ -14,6 +16,7 @@ export default function RecipeCard(props) {
        editable} = props.item; //pass editable as true to have an edit button
 
   const [edit, setEdit] = useState(false);
+  
 
   //temp variables to reduce explosions, only show if not passed title
   // if (!props.title) {
