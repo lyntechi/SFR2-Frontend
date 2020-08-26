@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
-import axios from "axios";
 import { getRecipes, addRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-import RecipeCard from "./RecipeCard";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import RecipeForm from "./RecipeForm";
 
 // TO-DO:
 // 1. create an add (+) button which pops up a recipe form
@@ -13,8 +11,12 @@ const searchBarValue = " ";
 
 function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState([]);
+  const [userRecipeList, setUserRecipeList] = useState(props.getRecipes());
 
+  useEffect(() => {
+    props.getRecipes()
+  },[])
+  
   // For SEARCHBAR: Filter onChange Function
   //   const onRecipeFilterChange = (evt) => {
   //     const { } = evt.target
@@ -24,7 +26,7 @@ function UserRecipes(props) {
   //   const filteredRecipes = allRecipes.filter((recipe) => {
   //     return recipe.title.toLowerCase().includes();
   //   });
-
+  console.log('props recipes',props.recipes)
   return (
     <>
       <label>
@@ -37,6 +39,7 @@ function UserRecipes(props) {
       </label>
       <div className="recipes container">
         {props.recipes.map((item) => {
+          console.log('recipes item',item)
           return (
             <RecipeCard
               item={item}
@@ -55,12 +58,13 @@ function UserRecipes(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log('this is state',state)
   return {
     recipes: state.recipesReducer.recipes,
     makingChanges: state.recipesReducer.makingChanges,
   };
 };
 
-export default connect(mapStateToProps, { getRecipes, addRecipes })(
+export default connect(mapStateToProps, { getRecipes })(
   UserRecipes
 );

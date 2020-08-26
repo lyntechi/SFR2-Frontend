@@ -99,7 +99,7 @@ const defaultData = {
     e.preventDefault();
     console.log('recipe data',formData)
     props.addRecipes(formData);
-    setEdit(false);
+    // setEdit(false);
   }
 
   return (

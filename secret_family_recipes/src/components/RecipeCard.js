@@ -1,22 +1,31 @@
-import React, {useState} from 'react';
-import RecipeForm from './RecipeForm';
-import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core';
-import {deleteRecipes,editRecipes,getRecipes} from "../actions/recipesActions";
+import React, { useState } from "react";
+import RecipeForm from "./RecipeForm";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@material-ui/core";
+import {
+  deleteRecipes,
+  editRecipes,
+  getRecipes,
+} from "../actions/recipesActions";
 import { connect } from "react-redux";
 
-
-export default function RecipeCard(props) {
-  let {shared,
-       photo,
-       title,
-       categories,
-       source,
-       ingredients,
-       instructions,
-       editable} = props.item; //pass editable as true to have an edit button
-
+function RecipeCard(props) {
+  let {
+    
+   
+    img_url,
+    title,
+    categories,
+    source,
+    ingredients,
+    instructions,
+    
+  } = props.item; //pass editable as true to have an edit button
+ 
   const [edit, setEdit] = useState(false);
-  
 
   //temp variables to reduce explosions, only show if not passed title
   // if (!props.title) {
@@ -34,37 +43,49 @@ export default function RecipeCard(props) {
 
   //If edit is true, show RecipeForm with all Values.
   if (edit) {
-      return <RecipeForm
-               shared = {shared}
-               photo = {photo}
-               title = {title}
-               categories = {categories}
-               source = {source}
-               ingredients = {ingredients}
-               instructions = {instructions}
-               setEdit = {setEdit}
-             />
+    return (
+      <RecipeForm
+        // shared={shared}
+        img_url={img_url}
+        title={title}
+        categories={categories}
+        source={source}
+        ingredients={ingredients}
+        instructions={instructions}
+        setEdit={setEdit}
+      />
+    );
   }
 
-    return (
-    <Accordion className='recipe-card'>
+  return (
+    <Accordion className="recipe-card">
       <AccordionSummary>
-        <img src={photo} alt={'picture of ' + title}/>
-        <h3>{title}, from <span className='card-source'>{source}</span></h3>
+        <img src={img_url} alt={"picture of " + title} />
+        <h3>
+          {title}, from <span className="card-source">{source}</span>
+        </h3>
       </AccordionSummary>
       <AccordionDetails>
-        <div className='card-ingredients'>
+        <div className="card-ingredients">
           <ul>
-            {ingredients && ingredients.map((i, index) => {
-            return (
-              <li key={index} >{i.quantity}, {i.ingredient}</li>
-            )
-          })}
+            {ingredients &&
+              ingredients.map((i, index) => {
+                return (
+                  <li key={index}>
+                    {i.quantity}, {i.ingredient}
+                  </li>
+                );
+              })}
           </ul>
         </div>
-        <p>{instructions}</p>  
-        {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
+        <p>{instructions}</p>
+        {/* {editable && <button onClick={() => setEdit(true)}>[edit]</button>} */}
       </AccordionDetails>
     </Accordion>
-  )
+    
+    )
 }
+
+export default connect(null, { deleteRecipes, editRecipes, getRecipes })(
+  RecipeCard
+);

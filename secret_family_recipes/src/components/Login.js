@@ -33,7 +33,7 @@ function LoginForm(props) {
       .then((res) => {
         props.setLoggedIn();
         localStorage.setItem("token", res.data.data.token);
-        history.push("/recipes");
+        history.push("/UserRecipes");
       })
       .catch((err) => {
         console.log("error happend with post request", err);
