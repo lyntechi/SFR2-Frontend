@@ -16,18 +16,18 @@ export default function RecipeCard(props) {
   const [edit, setEdit] = useState(false);
 
   //temp variables to reduce explosions, only show if not passed title
-  if (!props.title) {
-    photo = 'https://images.unsplash.com/photo-1578895210405-907db486c111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=80'
-    ingredients = [
-        {'ingredient': 'apples', 'quantity': '3'},
-        {'ingredient': 'cinnamon', 'quantity': '1tsp'}
-      ];
-    title = 'applesauce';
-    source = 'Granny Smith';
-    instructions = 'Peel apples, Combine ingredients, and cook in a pot.';
-    categories = ['snack'];
-    editable = true;
-  }
+  // if (!props.title) {
+  //   photo = 'https://images.unsplash.com/photo-1578895210405-907db486c111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=80'
+  //   ingredients = [
+  //       {'ingredient': 'apples', 'quantity': '3'},
+  //       {'ingredient': 'cinnamon', 'quantity': '1tsp'}
+  //     ];
+  //   title = 'applesauce';
+  //   source = 'Granny Smith';
+  //   instructions = 'Peel apples, Combine ingredients, and cook in a pot.';
+  //   categories = ['snack'];
+  //   editable = true;
+  // }
 
   //If edit is true, show RecipeForm with all Values.
   if (edit) {
@@ -52,7 +52,7 @@ export default function RecipeCard(props) {
       <AccordionDetails>
         <div className='card-ingredients'>
           <ul>
-          {ingredients.map((i, index) => {
+            {ingredients && ingredients.map((i, index) => {
             return (
               <li key={index} >{i.quantity}, {i.ingredient}</li>
             )
