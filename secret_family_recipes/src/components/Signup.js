@@ -5,6 +5,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 import { connect } from "react-redux";
+import styles from "../styles";
 
 const initialFormValues = {
   username: "",
@@ -79,9 +80,9 @@ const initialDisabled = true;
 
   return (
     <>
-      <form className="form container" onSubmit={onSubmit}>
+      <form className="formContainer" onSubmit={onSubmit}>
         <div>
-          <h2>
+          <h2 className="signUpTitle">
             Sign Up for <br />
             Secret Family Recipe
           </h2>
