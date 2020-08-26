@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import RecipeForm from './RecipeForm';
 import {Accordion, AccordionSummary, AccordionDetails} from '@material-ui/core';
 
-
 export default function RecipeCard(props) {
   let {shared,
        photo,
@@ -31,7 +30,8 @@ export default function RecipeCard(props) {
 
   //If edit is true, show RecipeForm with all Values.
   if (edit) {
-      return <RecipeForm
+      return <div className='recipe-card'>
+      <RecipeForm
                shared = {shared}
                photo = {photo}
                title = {title}
@@ -41,6 +41,7 @@ export default function RecipeCard(props) {
                instructions = {instructions}
                setEdit = {setEdit}
              />
+        </div>
   }
 
     return (

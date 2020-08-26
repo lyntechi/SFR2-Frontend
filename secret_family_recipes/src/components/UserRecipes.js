@@ -3,8 +3,8 @@ import RecipeCard from './RecipeCard';
 import axios from "axios";
 import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-import RecipeCard from "./RecipeCard";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import RecipeForm from './RecipeForm';
 
 // TO-DO:
 // 1. create an add (+) button which pops up a recipe form
@@ -17,7 +17,7 @@ export default function AllRecipes(props) {
 
     // Getting all User's recipe cards 
   useEffect(()=> {
-      axios.get('') // LYNDA's CODE HERE
+      axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes') // LYNDA's CODE HERE
       .then(res => {
         setUserRecipeList(res.data.data) 
         console.log(res.data.data)
@@ -48,8 +48,8 @@ export default function AllRecipes(props) {
         />
       </label>
       <div className="recipes container">
-          {recipeList.map((item) => {
-          return <RecipeCard item={item} />
+          {userRecipeList.map((item, index) => {
+          return <RecipeCard key={index} item={item} />
       })}
       </div>
 
