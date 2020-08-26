@@ -24,8 +24,6 @@ function App(props) {
   }, []);
   return (
     <div className="App">
-      {/* TODO: delete AllRecipes component! */}
-      <AllRecipes /> 
       <header>
         <Header />
       </header>
@@ -35,6 +33,7 @@ function App(props) {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/logout" component={LogOutPage} />
+        <Route path="/allrecipes" component={AllRecipes} />
       </Switch>
     </div>
   );
