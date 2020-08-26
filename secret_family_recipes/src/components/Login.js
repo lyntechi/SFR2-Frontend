@@ -3,6 +3,8 @@ import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import {connect} from "react-redux"
+import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 
 const initialFormValues = {
   username: "",
@@ -16,7 +18,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-export default function LoginForm() {
+   function LoginForm(props) {
   const [login, setLogin] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -28,9 +30,14 @@ export default function LoginForm() {
     axiosWithAuth()
       .post("/api/users/login ", login)
       .then((res) => {
+        props.setLoggedIn()
         localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
-      });
+      })
+      .catch((err) =>{
+        console.log('error happend with post request', err)
+      })
+
     const userLogin = {
       username: login.username.trim(),
       password: login.password.trim(),
@@ -119,3 +126,10 @@ export default function LoginForm() {
     </form>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.accountReducer.loggedIn,
+  };
+};
+export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(LoginForm);

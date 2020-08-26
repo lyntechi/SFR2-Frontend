@@ -17,9 +17,11 @@ export const getRecipes = () => (dispatch) => {
 
 export const addRecipes = (recipe) => (dispatch) => {
   dispatch({ type: MAKING_CHANGES });
+  console.log('this is res data')
   axiosWithAuth()
     .post("/api/recipes", recipe)
     .then((res) => {
+      console.log('this is res data',res.data)
       dispatch({ type: UPDATE_RECIPES, payload: res.data });
     })
     .catch((err) => {
@@ -32,6 +34,7 @@ export const deleteRecipes = (recipeId) => (dispatch) => {
   axiosWithAuth()
     .delete(`/api/recipes/${recipeId}`)
     .then((res) => {
+    
       dispatch({ type: UPDATE_RECIPES, payload: res.data });
     })
     .catch((err) => {

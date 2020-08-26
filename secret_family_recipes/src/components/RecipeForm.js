@@ -3,20 +3,22 @@ import * as yup from "yup";
 
 import recipeSchema from "./validation/RecipeSchema";
 import Ingredient from "./Ingredient";
+import { addRecipes } from "../actions/recipesActions";
+import { connect } from "react-redux";
 
-const defaultIngredientObj = { ingredient: "", quantity: "" };
+const defaultIngredientObj = { ingredient: "cheese", quantity: '1' };
 
 const defaultData = {
-  shared: false,
-  photo: "",
-  title: "",
-  categories: [""],
-  source: "",
+  private: false,
+  image_url: "",
+  title: "chicken parm",
+  categories: ["chicken"],
+  source: "aunt",
   ingredients: [defaultIngredientObj],
-  instructions: [""],
+  instructions: ["test"],
 };
 
-export default function RecipeForm() {
+ function RecipeForm(props) {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState([""]);
   const [disabled, setDisabled] = useState(false);
@@ -87,10 +89,10 @@ export default function RecipeForm() {
 
   //Network Request
   function submit(e) {
+
     e.preventDefault();
-    ///////////////
-    //POST REQUEST
-    ///////////////
+    console.dir(formData)
+    props.addRecipes(formData);
   }
 
   return (
@@ -105,15 +107,7 @@ export default function RecipeForm() {
             onChange={updateForm}
           />
         </label>
-        <label>
-          Category:&nbsp;
-          <input
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={updateForm}
-          />
-        </label>
+       
         <label>
           Category:&nbsp;
           <input
@@ -123,24 +117,8 @@ export default function RecipeForm() {
             onChange={(e) => updateFormArray(e, 0)}
           />
         </label>
-        <label>
-          Servings:&nbsp;
-          <input
-            type="number"
-            name="servings"
-            value={formData.servings}
-            onChange={updateForm}
-          />
-        </label>
-        <label>
-          Preparation Time:&nbsp;
-          <input
-            type="text"
-            name="prepTime"
-            value={formData.prepTime}
-            onChange={updateForm}
-          />
-        </label>
+      
+       
       </div>
       <div className="ingredients">
         <label>
@@ -181,7 +159,7 @@ export default function RecipeForm() {
             name="shared"
             type="radio"
             checked={formData.shared}
-            onChange={() => setFormData({ ...formData, shared: true })}
+            onChange={() => setFormData({ ...formData, private: true })}
           />
         </label>
         <label>
@@ -190,7 +168,7 @@ export default function RecipeForm() {
             name="shared"
             type="radio"
             checked={!formData.shared}
-            onChange={() => setFormData({ ...formData, shared: false })}
+            onChange={() => setFormData({ ...formData, private: false })}
           />
         </label>
       </div>
@@ -205,3 +183,6 @@ export default function RecipeForm() {
     </form>
   );
 }
+
+
+export default connect(null, { addRecipes })(RecipeForm);

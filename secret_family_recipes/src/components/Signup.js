@@ -19,7 +19,7 @@ const initialFormErrors = {
 const initialUser = [];
 const initialDisabled = true;
 
-  export default function SignupForm(props) {
+  function SignupForm(props) {
   const [users, setUsers] = useState(initialUser);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
@@ -34,6 +34,7 @@ const initialDisabled = true;
     axiosWithAuth()
       .post("/api/users/register", formValues)
       .then((res) => {
+        props.setLoggedIn()
         console.log("token", res);
         localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
@@ -131,3 +132,9 @@ const initialDisabled = true;
 
 
 
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.accountReducer.loggedIn,
+  };
+};
+export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(SignupForm);

@@ -21,7 +21,7 @@ function Header(props) {
       )}
       {props.loggedIn && (
         <>
-          <Link to="/recipes" id="signUpLink">
+          <Link to="/allrecipes" id="signUpLink">
             <h2>Recipes</h2>
           </Link>
           <Link to="/logout" id="signUpLink">
