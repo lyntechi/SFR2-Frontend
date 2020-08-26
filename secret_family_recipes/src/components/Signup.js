@@ -3,6 +3,8 @@ import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
+import { connect } from "react-redux";
 
 const initialFormValues = {
   username: "",
@@ -17,12 +19,14 @@ const initialFormErrors = {
 const initialUser = [];
 const initialDisabled = true;
 
-export default function SignupForm() {
+  export default function SignupForm(props) {
   const [users, setUsers] = useState(initialUser);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
+
+
 
   // FORM FUNCTIONS
   const onSubmit = (evt) => {
@@ -124,3 +128,6 @@ export default function SignupForm() {
     </>
   );
 }
+
+
+
