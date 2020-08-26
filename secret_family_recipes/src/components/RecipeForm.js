@@ -22,6 +22,7 @@ const defaultData = {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState([""]);
   const [disabled, setDisabled] = useState(false);
+  const {setEdit} = props;
 
   function updateFormArray(e, index) {
     const { name, value } = e.target;
@@ -98,6 +99,7 @@ const defaultData = {
     e.preventDefault();
     console.dir(formData)
     props.addRecipes(formData);
+    setEdit(false);
   }
 
   return (
