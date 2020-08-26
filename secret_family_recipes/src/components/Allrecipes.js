@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-// import Header from "./components/Header.js"; // needs to navigate to signup/login pages
-// import RecipeCards from ' ' // need to import recipe component
 import axios from "axios";
 import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 // This page will render a search bar at the top and recipe cards below
 // TO-DO:
-// 1. import Allrecipes.js into Header and App? -- make a link in navbar
-// 2. create filter function to filter recipe cards as input value changes
-// 3. create an add (+) button? so that when clicked, an empty card template appears
-// (importing the RecipeForm component?)
-// 4.
+// 1. create filter function to filter recipe cards as input value changes
+
 
 const searchBarValue = " ";
 
