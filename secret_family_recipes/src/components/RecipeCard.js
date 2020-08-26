@@ -13,6 +13,7 @@ import {
 import { connect } from "react-redux";
 
 function RecipeCard(props) {
+  console.log('this is props', props)
   let {
     
    
@@ -23,7 +24,7 @@ function RecipeCard(props) {
     ingredients,
     instructions,
     
-  } = props.item; //pass editable as true to have an edit button
+  } = props.item.data; //pass editable as true to have an edit button
  
   const [edit, setEdit] = useState(false);
 

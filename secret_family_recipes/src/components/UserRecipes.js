@@ -11,7 +11,7 @@ const searchBarValue = " ";
 
 function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState(props.getRecipes());
+  const [userRecipeList, setUserRecipeList] = useState([]);
 
   useEffect(() => {
     props.getRecipes()
