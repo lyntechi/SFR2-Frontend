@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Allrecipes from "./Allrecipes";
 
 function Header(props) {
   return (
@@ -12,6 +13,9 @@ function Header(props) {
           </Link>
           <Link to="/signup" id="signUpLink">
             <h2>Sign Up</h2>
+          </Link>
+          <Link to="/allrecipes" id="allRecipesLink">
+            <h2>Recipes</h2>
           </Link>
         </>
       )}

@@ -8,6 +8,7 @@ export const getRecipes = () => (dispatch) => {
     .get("/api/recipes")
     .then((res) => {
       dispatch({ type: UPDATE_RECIPES, payload: res.data });
+      console.log(res.data)
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });

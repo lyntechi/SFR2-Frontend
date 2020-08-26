@@ -10,7 +10,6 @@ import LogOutPage from "./components/LogOutPage.js";
 import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
-import RecipeCard from './components/RecipeCard';
 import AllRecipes from "./components/Allrecipes";
 
 function App(props) {
@@ -23,8 +22,6 @@ function App(props) {
   }, []);
   return (
     <div className="App">
-      {/* TODO: delete AllRecipes component! */}
-      <AllRecipes />
       <header>
         <Header />
       </header>
@@ -34,6 +31,7 @@ function App(props) {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/logout" component={LogOutPage} />
+        <Route path="/allrecipes" component={AllRecipes} />
       </Switch>
     </div>
   );

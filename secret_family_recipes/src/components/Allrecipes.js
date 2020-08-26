@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-
+import RecipeCard from "./RecipeCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 // This page will render a search bar at the top and recipe cards below
 // TO-DO:
 // 1. import Allrecipes.js into Header and App? -- make a link in navbar
@@ -15,13 +16,29 @@ import { connect } from "react-redux";
 
 const searchBarValue = " ";
 
-function AllRecipes(props) {
+export default function AllRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
+  const [recipeList, setRecipeList] = useState([])
+
+    // Getting all public recipe cards 
+  useEffect(()=> {
+      axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes')
+      .then(res => {
+        
+        setRecipeList(res.data.data) 
+        console.log(res.data.data) // returns array of objects w/recipe data
+      })
+      .catch(err => {
+          console.log(err)
+      })
+  }, [])
+
+// console.log(props.recipes) // returns empty array atm
 
   // Filter onChange Function
-  // const onRecipeFilterChange = (evt) => {
-
-  // }
+//   const onRecipeFilterChange = (evt) => {
+//     const { } = evt.target
+//   }
 
   // Filtered results
   //   const filteredRecipes = allRecipes.filter((recipe) => {
@@ -38,16 +55,20 @@ function AllRecipes(props) {
           // onChange={onRecipeFilterChange}
         />
       </label>
-      <div className="recipes container">{props.recipes.map}</div>
+      <div className="recipes container">
+          {recipeList.map((item) => {
+          return <RecipeCard item={item} />
+      })}
+      </div>
     </>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    recipes: state.recipesReducer.recipes,
-    makingChanges: state.recipesReducer.makingChanges,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     recipes: state.recipesReducer.recipes,
+//     makingChanges: state.recipesReducer.makingChanges,
+//   };
+// };
 
-export default connect(mapStateToProps, { getRecipes })(AllRecipes);
+// export default connect(mapStateToProps, { getRecipes })(AllRecipes);
