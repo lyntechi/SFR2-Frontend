@@ -7,7 +7,7 @@ export const getRecipes = () => (dispatch) => {
   axiosWithAuth()
     .get("/api/recipes")
     .then((res) => {
-      dispatch({ type: UPDATE_RECIPES, payload: res.data });
+      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
       console.log(res.data)
     })
     .catch((err) => {
@@ -22,7 +22,7 @@ export const addRecipes = (recipe) => (dispatch) => {
     .post("/api/recipes", recipe)
     .then((res) => {
       console.log('this is res data',res.data)
-      dispatch({ type: UPDATE_RECIPES, payload: res.data });
+      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });
@@ -35,7 +35,7 @@ export const deleteRecipes = (recipeId) => (dispatch) => {
     .delete(`/api/recipes/${recipeId}`)
     .then((res) => {
     
-      dispatch({ type: UPDATE_RECIPES, payload: res.data });
+      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });
@@ -47,7 +47,7 @@ export const editRecipes = (recipe) => (dispatch) => {
   axiosWithAuth()
     .put(`/api/recipes/${recipe.id}`, recipe)
     .then((res) => {
-      dispatch({ type: UPDATE_RECIPES, payload: res.data });
+      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });

@@ -14,9 +14,9 @@ function UserRecipes(props) {
   const [userRecipeList, setUserRecipeList] = useState([]);
 
   useEffect(() => {
-    props.getRecipes()
-  },[])
-  
+    props.getRecipes();
+  }, []);
+
   // For SEARCHBAR: Filter onChange Function
   //   const onRecipeFilterChange = (evt) => {
   //     const { } = evt.target
@@ -26,7 +26,7 @@ function UserRecipes(props) {
   //   const filteredRecipes = allRecipes.filter((recipe) => {
   //     return recipe.title.toLowerCase().includes();
   //   });
-  console.log('props recipes',props.recipes)
+
   return (
     <>
       <label>
@@ -39,7 +39,7 @@ function UserRecipes(props) {
       </label>
       <div className="recipes container">
         {props.recipes.map((item) => {
-          console.log('recipes item',item)
+          console.log('recipes item', item)
           return (
             <RecipeCard
               item={item}
@@ -58,13 +58,10 @@ function UserRecipes(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('this is state',state)
   return {
     recipes: state.recipesReducer.recipes,
     makingChanges: state.recipesReducer.makingChanges,
   };
 };
 
-export default connect(mapStateToProps, { getRecipes })(
-  UserRecipes
-);
+export default connect(mapStateToProps, { getRecipes })(UserRecipes);

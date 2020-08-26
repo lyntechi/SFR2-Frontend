@@ -51,7 +51,7 @@ export default function AllRecipes(props) {
       </label>
       <div className="recipes container">
           {recipeList.map((item) => {
-          return <RecipeCard item={item} />
+          return <RecipeCard item={item} key={item.id}/>
       })}
       </div>
     </>
