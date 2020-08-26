@@ -6,37 +6,31 @@ import { connect } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import RecipeForm from './RecipeForm';
 
+
 // TO-DO:
 // 1. create an add (+) button which pops up a recipe form
 
 const searchBarValue = " ";
 
-export default function AllRecipes(props) {
+function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState([])
+  const [userRecipeList, setUserRecipeList] = useState(props.getRecipes());
 
-    // Getting all User's recipe cards 
-  useEffect(()=> {
-      axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes') // LYNDA's CODE HERE
-      .then(res => {
-        setUserRecipeList(res.data.data) 
-        console.log(res.data.data)
-      })
-      .catch(err => {
-          console.log(err)
-      })
-  }, [])
 
+  useEffect(() => {
+    props.getRecipes()
+  },[])
+  
   // For SEARCHBAR: Filter onChange Function
-//   const onRecipeFilterChange = (evt) => {
-//     const { } = evt.target
-//   }
+  //   const onRecipeFilterChange = (evt) => {
+  //     const { } = evt.target
+  //   }
 
   // For SEARCHBAR: Filtered results
-//   const filteredRecipes = allRecipes.filter((recipe) => {
-//     return recipe.title.toLowerCase().includes();
-//   });
-
+  //   const filteredRecipes = allRecipes.filter((recipe) => {
+  //     return recipe.title.toLowerCase().includes();
+  //   });
+  console.log('props recipes',props.recipes)
   return (
     <>
       <label>
@@ -48,15 +42,33 @@ export default function AllRecipes(props) {
         />
       </label>
       <div className="recipes container">
-          {userRecipeList.map((item, index) => {
-          return <RecipeCard key={index} item={item} />
-      })}
+        {props.recipes.map((item) => {
+          console.log('recipes item',item)
+          return (
+            <RecipeCard
+              item={item}
+              key={item.id}
+              makingChanges={props.makingChanges}
+            />
+          );
+        })}
       </div>
 
-      <div className='recipe form'>
-          <RecipeForm />
+      <div className="recipe form">
+        <RecipeForm />
       </div>
     </>
   );
 }
 
+const mapStateToProps = (state) => {
+  console.log('this is state',state)
+  return {
+    recipes: state.recipesReducer.recipes,
+    makingChanges: state.recipesReducer.makingChanges,
+  };
+};
+
+export default connect(mapStateToProps, { getRecipes })(
+  UserRecipes
+);
