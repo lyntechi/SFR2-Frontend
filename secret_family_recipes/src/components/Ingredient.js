@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 /* 
 So, for this I basically gave each ingredientObj it's
 Own Slice of State, and then whenever it's updated
@@ -16,35 +16,39 @@ in my head, let alone clear in the code (it still isn't)
 
 */
 export default function Ingredient(props) {
-  const { add, index, item, updateIngredients } = props
-  const [ingredientObj, setIngredientObj] = useState({'ingredient': item.ingredient, 'quantity': item.quantity})
-
+  const { add, index, item, updateIngredients } = props;
+  const [ingredientObj, setIngredientObj] = useState({
+    ingredient: item.ingredient,
+    quantity: item.quantity,
+  });
 
   function updateIngredientObj(e) {
-    const {name, value} = e.target;
-    setIngredientObj({...ingredientObj, [name]: value})
+    const { name, value } = e.target;
+    setIngredientObj({ ...ingredientObj, [name]: value });
   }
 
   useEffect(() => {
-    updateIngredients(index, ingredientObj)
-  }, [ingredientObj])
-    
+    updateIngredients(index, ingredientObj);
+  }, [ingredientObj]);
+
   return (
-    <div className='ingredient-amount'>
-        <input type='text'
-               placeholder='ingredient'
-               value={ingredientObj.ingredient}
-               onChange={updateIngredientObj}
-               onKeyDown={e => e.which === 13 && add}
-               name='ingredient'
-        />
-        <input type='text'
-               placeholder='quantity'
-               value={ingredientObj.quantity}
-               onKeyDown={e => e.which === 13 && add}
-               onChange={updateIngredientObj}
-               name='quantity'
-        />
+    <div className="ingredient-amount">
+      <input
+        type="text"
+        placeholder="ingredient"
+        value={ingredientObj.ingredient}
+        onChange={updateIngredientObj}
+        onKeyDown={(e) => e.which === 13 && add}
+        name="ingredient"
+      />
+      <input
+        type="text"
+        placeholder="quantity"
+        value={ingredientObj.quantity}
+        onKeyDown={(e) => e.which === 13 && add}
+        onChange={updateIngredientObj}
+        name="quantity"
+      />
     </div>
-  )
+  );
 }

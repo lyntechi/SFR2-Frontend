@@ -41,9 +41,9 @@ export default function AllRecipes(props) {
 //   }
 
   // Filtered results
-//   const filteredRecipes = allRecipes.filter((recipe) => {
-//     return recipe.title.toLowerCase().includes();
-//   });
+  //   const filteredRecipes = allRecipes.filter((recipe) => {
+  //     return recipe.title.toLowerCase().includes();
+  //   });
 
   return (
     <>

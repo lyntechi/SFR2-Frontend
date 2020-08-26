@@ -11,6 +11,7 @@ const initialState = {
 };
 
 export const recipesReducer = (state = initialState, action) => {
+  console.log('reducer')
   switch (action.type) {
     case MAKING_CHANGES:
       return {
@@ -20,7 +21,7 @@ export const recipesReducer = (state = initialState, action) => {
     case UPDATE_RECIPES:
       return {
         ...state,
-        plants: action.payload,
+        recipes: action.payload,
         message: "",
         makingChanges: false,
       };

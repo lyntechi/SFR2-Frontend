@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Allrecipes from "./Allrecipes";
 
 function Header(props) {
-
-
   return (
     <header>
       {!props.loggedIn && (
@@ -23,7 +21,7 @@ function Header(props) {
       )}
       {props.loggedIn && (
         <>
-          <Link to="/recipes" id="signUpLink">
+          <Link to="/allrecipes" id="signUpLink">
             <h2>Recipes</h2>
           </Link>
           <Link to="/logout" id="signUpLink">
