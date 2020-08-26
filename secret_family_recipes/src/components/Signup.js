@@ -26,7 +26,7 @@ const initialDisabled = true;
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
   const history = useHistory();
-
+  const [loginExists, setLoginExists] = useState(false);
 
 
   // FORM FUNCTIONS
@@ -36,10 +36,13 @@ const initialDisabled = true;
       .post("/api/users/register", formValues)
       .then((res) => {
         props.setLoggedIn()
-        console.log("token", res);
+        console.log("new user created", res.data);
         localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
-      });
+      })
+      .catch(error=>{
+        setLoginExists(true);
+      })
     const newUser = {
       username: formValues.username.trim(),
       password: formValues.password.trim(),
@@ -86,6 +89,9 @@ const initialDisabled = true;
             Sign Up for <br />
             Secret Family Recipe
           </h2>
+          {loginExists === false ? null : (
+          <p className="error">Username is already taken. Try Again!</p>
+        )}
         </div>
         <div className="error container">
           <div className="error">{errors.first_name}</div>

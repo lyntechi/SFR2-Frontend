@@ -3,7 +3,7 @@ import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
-import {connect} from "react-redux"
+import { connect } from "react-redux";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 
 const initialFormValues = {
@@ -18,10 +18,11 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-   function LoginForm(props) {
+function LoginForm(props) {
   const [login, setLogin] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const [doesntExist, setDoesntExist] = useState(false);
   const history = useHistory();
 
   // FORM FUNCTIONS
@@ -30,13 +31,15 @@ const initialDisabled = true;
     axiosWithAuth()
       .post("/api/users/login ", login)
       .then((res) => {
-        props.setLoggedIn()
+        props.setLoggedIn();
         localStorage.setItem("token", res.data.data.token);
-        history.push("/recipes");
+        history.push("/UserRecipes");
       })
-      .catch((err) =>{
-        console.log('error happend with post request', err)
-      })
+      .catch((err) => {
+        console.log("error happend with post request", err);
+
+        setDoesntExist(true);
+      });
 
     const userLogin = {
       username: login.username.trim(),
@@ -83,6 +86,9 @@ const initialDisabled = true;
           <br />
           Secret Family Recipe
         </h2>
+        {doesntExist === false ? null : (
+          <p className="error">Username doesnt exist!</p>
+        )}
       </div>
       <div className="error container">
         <div className="error">{errors.first_name}</div>
@@ -132,4 +138,6 @@ const mapStateToProps = (state) => {
     loggedIn: state.accountReducer.loggedIn,
   };
 };
-export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(LoginForm);
+export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(
+  LoginForm
+);

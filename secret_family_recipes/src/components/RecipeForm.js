@@ -28,6 +28,7 @@ const defaultData = {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
+    throwErrors(name, value);
     setFormData({...formData, [name]: newArr})
   }
 
@@ -59,9 +60,11 @@ const defaultData = {
   }
   ///actually change the ingredients array in the form
   function updateIngredients(index, ingredientObj) {
+    const updatedIngredients = newIngredients(ingredientObj, index);
+    throwErrors('ingredients', updatedIngredients)
     setFormData({
       ...formData,
-      ingredients: newIngredients(ingredientObj, index),
+      ingredients: updatedIngredients
     });
   }
   //watch for changes to ingredientObj, and update the formData with it
@@ -75,9 +78,10 @@ const defaultData = {
         setFormErrors({
           ...formErrors,
           [name]: "",
-        });
+        })
       })
       .catch((err) => {
+        console.log(err);
         setFormErrors({
           ...formErrors,
           [name]: err.errors[0],
@@ -97,9 +101,9 @@ const defaultData = {
   function submit(e) {
 
     e.preventDefault();
-    console.dir(formData)
+    console.log('recipe data',formData)
     props.addRecipes(formData);
-    setEdit(false);
+    // setEdit(false);
   }
 
   return (
@@ -183,7 +187,7 @@ const defaultData = {
         </label>
       </div>
       <p>{formErrors.title}</p>
-      <p>{formErrors.category}</p>
+      <p>{formErrors.categories}</p>
       <p>{formErrors.ingredients}</p>
       <p>{formErrors.instructions}</p>
 

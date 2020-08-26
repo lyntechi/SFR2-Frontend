@@ -15,14 +15,17 @@ function Header(props) {
             <h2>Sign Up</h2>
           </Link>
           <Link to="/allrecipes" id="allRecipesLink">
-            <h2>Recipes</h2>
+            <h2>All Recipes</h2>
           </Link>
         </>
       )}
       {props.loggedIn && (
         <>
-          <Link to="/allrecipes" id="signUpLink">
-            <h2>Recipes</h2>
+          <Link to="/allrecipes" id="allRecipesLink">
+            <h2>All Recipes</h2>
+          </Link>
+          <Link to="/userRecipes" id="signUpLink">
+            <h2>Private Recipes</h2>
           </Link>
           <Link to="/logout" id="signUpLink">
             <h2>Log Out</h2>
