@@ -4,22 +4,58 @@ import * as yup from 'yup';
 import recipeSchema from './validation/RecipeSchema';
 import Ingredient from './Ingredient';
 
-  const defaultData = {
-    'shared': false,
-    'photo': '',
-    'title': '',
-    'categories': [],
-    'source': '',
-    'ingredients': [{ingredient: '', quantity: ''}],
-    'instructions': [],
-  }
+const defaultIngredientObj = {'ingredient': '', 'quantity': ''};
+
+const defaultData = {
+  'shared': false,
+  'photo': '',
+  'title': '',
+  'categories': [''],
+  'source': '',
+  'ingredients': [defaultIngredientObj],
+  'instructions': [''],
+}
 
 
 export default function RecipeForm () {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(['']);
   const [disabled, setDisabled] = useState(false);
+
+   function updateFormArray(e, index) {
+    const {name, value} = e.target;
+    const newArr = [...formData[name]];
+    console.log(newArr);
+    newArr[index] = value;
+    console.log(newArr);
+    setFormData({...formData, [name]: newArr})
+  }
+
+  function updateForm(e) {
+    const {name, value} = e.target;
+    throwErrors(name, value);
+    setFormData({...formData, [name]: value})
+  } 
+///Add ingredient input field
+  function addIngredient(e) {
+    e.preventDefault();
+    setFormData({...formData, 
+      'ingredients': [...formData.ingredients, 
+        defaultIngredientObj]})
+  } 
+///get an updated array of ingredients without manipulating state
+  function newIngredients(ingredientObj, index) {
+    const result = [...formData.ingredients];
+    result[index] = ingredientObj;
+    return result; 
+  }
+///actually change the ingredients array in the form
+  function updateIngredients(index, ingredientObj) {
+    setFormData({...formData, 'ingredients': newIngredients(ingredientObj, index)})
+  }
+//watch for changes to ingredientObj, and update the formData with it
   
+//VALIDATION
   const throwErrors = (name, value) => {
     yup
       .reach(recipeSchema, name)
@@ -44,40 +80,16 @@ export default function RecipeForm () {
     setDisabled(!valid);
     })
   }, [formData])
+//END VALIDATION
 
 
-  //helper function for updating Ingredients array
-  function newIngredients(key, value) {
-    const result = [...formData.ingredients]
-    result[key]= value;
-    console.log(result);
-    return result;
-  }
 
-  function updateForm(e) {
-    const {name, value} = e.target;
-    if (!isNaN(name)) { //if the name is a number, it's the index of the
-                        //ingredients array
-      setFormData({...formData,
-                    'ingredients': newIngredients(name, value)
-                  })            
-    }
-    throwErrors(name, value);
-    setFormData({...formData, [name]: value})
-  }
   //Network Request
   function submit(e) {
     e.preventDefault()
     ///////////////
     //POST REQUEST 
     ///////////////
-  }
-
-  //add additional input fields for ingredients
-  function addIngredient(e) {
-    e.preventDefault();
-    setFormData({...formData,
-      ingredients: [...formData.ingredients, '']})
   }
 
   return (
@@ -92,9 +104,9 @@ export default function RecipeForm () {
         </label>
         <label>Category:&nbsp;
           <input type='text'
-                 name='category'
-                 value={formData.category}
-                 onChange={updateForm}
+                 name='categories'
+                 value={formData.categories[0]}
+                 onChange={(e) => updateFormArray(e, 0)}
           />
         </label>
         <label>Source:&nbsp;
@@ -110,11 +122,12 @@ export default function RecipeForm () {
           {/*<Ingredient />*/}
           {formData.ingredients.map((item, index) => {
             return (
-              <Ingredient ingredient={item}
+              <Ingredient item={item}
                           updateForm={updateForm}
                           add={addIngredient}
                           key={index}
-                          name={index}
+                          index={index} 
+                          updateIngredients={updateIngredients}
               />
               
             )
@@ -128,8 +141,8 @@ export default function RecipeForm () {
           <textarea rows='7'
                     cols='80'
                     name='instructions'
-                    value={formData.instructions}
-                    onChange={updateForm}
+                    value={formData.instructions[0]}
+                    onChange={e => updateFormArray(e, 0)}
           />
         </label>
       </div>
