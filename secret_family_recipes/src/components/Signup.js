@@ -35,7 +35,7 @@ const initialDisabled = true;
       .post("/api/users/register", formValues)
       .then((res) => {
         props.setLoggedIn()
-        console.log("token", res);
+        console.log("new user created", res.data);
         localStorage.setItem("token", res.data.data.token);
         history.push("/recipes");
       });
