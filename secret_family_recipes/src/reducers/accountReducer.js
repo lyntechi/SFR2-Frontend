@@ -1,5 +1,4 @@
 import { SET_LOGGED_IN, SET_LOGGED_OUT } from "../actions/accountActions";
-import { useState } from "react";
 const initialState = {
   loggedIn: false,
 };

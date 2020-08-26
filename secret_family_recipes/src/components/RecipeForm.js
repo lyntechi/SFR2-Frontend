@@ -6,7 +6,7 @@ import Ingredient from "./Ingredient";
 import { addRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
 
-const defaultIngredientObj = { ingredient: "cheese", quantity: '1' };
+const defaultIngredientObj = { ingredient: "cheese", quantity: "1" };
 
 const defaultData = {
   private: false,
@@ -18,18 +18,20 @@ const defaultData = {
   instructions: ["test"],
 };
 
- function RecipeForm(props) {
+function RecipeForm(props) {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState([""]);
   const [disabled, setDisabled] = useState(false);
-  const {setEdit} = props;
+  const { setEdit } = props;
 
   function updateFormArray(e, index) {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
+
     throwErrors(name, value);
     setFormData({...formData, [name]: newArr})
+
   }
 
   function updateForm(e) {
@@ -48,11 +50,10 @@ const defaultData = {
 
   function addCategory(e) {
     e.preventDefault();
-    setFormData({...formData,
-      'categories': [...formData.categories, '']})
+    setFormData({ ...formData, categories: [...formData.categories, ""] });
   }
 
-///get an updated array of ingredients without manipulating state
+  ///get an updated array of ingredients without manipulating state
   function newIngredients(ingredientObj, index) {
     const result = [...formData.ingredients];
     result[index] = ingredientObj;
@@ -99,9 +100,7 @@ const defaultData = {
 
   //Network Request
   function submit(e) {
-
     e.preventDefault();
-    console.log('recipe data',formData)
     props.addRecipes(formData);
     // setEdit(false);
   }
@@ -118,21 +117,21 @@ const defaultData = {
             onChange={updateForm}
           />
         </label>
-        <label>Categories:&nbsp;
+        <label>
+          Categories:&nbsp;
           {formData.categories.map((item, index) => {
             return (
-              <input type='text'
-                     name='categories'
-                     value={formData.categories[index]}
-                     onChange={(e) => updateFormArray(e, index)}
-                     key={index} 
+              <input
+                type="text"
+                name="categories"
+                value={formData.categories[index]}
+                onChange={(e) => updateFormArray(e, index)}
+                key={index}
               />
-            )
+            );
           })}
-            <button onClick={addCategory}>Add</button>
+          <button onClick={addCategory}>Add</button>
         </label>
-      
-       
       </div>
       <div className="ingredients">
         <label>
@@ -197,6 +196,5 @@ const defaultData = {
     </form>
   );
 }
-
 
 export default connect(null, { addRecipes })(RecipeForm);
