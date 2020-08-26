@@ -28,6 +28,7 @@ const defaultData = {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
+    throwErrors(name, value);
     setFormData({...formData, [name]: newArr})
   }
 
@@ -59,9 +60,11 @@ const defaultData = {
   }
   ///actually change the ingredients array in the form
   function updateIngredients(index, ingredientObj) {
+    const updatedIngredients = newIngredients(ingredientObj, index);
+    throwErrors('ingredients', updatedIngredients)
     setFormData({
       ...formData,
-      ingredients: newIngredients(ingredientObj, index),
+      ingredients: updatedIngredients
     });
   }
   //watch for changes to ingredientObj, and update the formData with it
@@ -75,9 +78,10 @@ const defaultData = {
         setFormErrors({
           ...formErrors,
           [name]: "",
-        });
+        })
       })
       .catch((err) => {
+        console.log(err);
         setFormErrors({
           ...formErrors,
           [name]: err.errors[0],
@@ -89,7 +93,6 @@ const defaultData = {
   useEffect(() => {
     recipeSchema.isValid(formData).then((valid) => {
       setDisabled(!valid);
-      console.log(formErrors);
     });
   }, [formData]);
   //END VALIDATION
