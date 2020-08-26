@@ -101,9 +101,9 @@ const defaultData = {
   function submit(e) {
 
     e.preventDefault();
-    console.dir(formData)
+    console.log('recipe data',formData)
     props.addRecipes(formData);
-    setEdit(false);
+    // setEdit(false);
   }
 
   return (

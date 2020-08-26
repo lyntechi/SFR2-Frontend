@@ -19,12 +19,16 @@ export const recipesReducer = (state = initialState, action) => {
         makingChanges: true,
       };
     case UPDATE_RECIPES:
-      return {
+
+      let x = {
         ...state,
-        recipes: action.payload,
+        recipes: [(action.payload) ,...state.recipes ],
+
         message: "",
         makingChanges: false,
       };
+      console.log('this is x',x);
+      return x
     case LOG_ERROR:
       return {
         ...state,
