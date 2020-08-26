@@ -16,7 +16,7 @@ in my head, let alone clear in the code (it still isn't)
 
 */
 export default function Ingredient(props) {
-  const {updateForm, add, index, item, updateIngredients } = props
+  const { add, index, item, updateIngredients } = props
   const [ingredientObj, setIngredientObj] = useState({'ingredient': item.ingredient, 'quantity': item.quantity})
 
 

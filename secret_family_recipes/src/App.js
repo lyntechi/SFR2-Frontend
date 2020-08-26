@@ -10,7 +10,6 @@ import LogOutPage from "./components/LogOutPage.js";
 import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
-import RecipeCard from './components/RecipeCard';
 import AllRecipes from "./components/Allrecipes";
 
 
@@ -36,7 +35,6 @@ function App(props) {
         <Route path="/signup" component={Signup} />
         <Route path="/logout" component={LogOutPage} />
       </Switch>
-      <RecipeForm />
     </div>
   );
 }

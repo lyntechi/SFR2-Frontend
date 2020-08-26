@@ -4,25 +4,38 @@ import * as yup from 'yup';
 import recipeSchema from './validation/RecipeSchema';
 import Ingredient from './Ingredient';
 
-  const defaultIngredientObj = {'ingredient': '', 'quantity': ''};
+const defaultIngredientObj = {'ingredient': '', 'quantity': ''};
 
-  const defaultData = {
-    'shared': false,
-    'photo': '',
-    'title': '',
-    'categories': [''],
-    'source': '',
-    'ingredients': [defaultIngredientObj],
-    'instructions': [''],
-  }
+const defaultData = {
+  'shared': false,
+  'photo': '',
+  'title': '',
+  'categories': [''],
+  'source': '',
+  'ingredients': [defaultIngredientObj],
+  'instructions': [''],
+}
 
 
 export default function RecipeForm () {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(['']);
   const [disabled, setDisabled] = useState(false);
-  const [ingredientObj, setIngredientObj] = useState({defaultIngredientObj}); 
-  
+
+   function updateFormArray(e, index) {
+    const {name, value} = e.target;
+    const newArr = [...formData[name]];
+    console.log(newArr);
+    newArr[index] = value;
+    console.log(newArr);
+    setFormData({...formData, [name]: newArr})
+  }
+
+  function updateForm(e) {
+    const {name, value} = e.target;
+    throwErrors(name, value);
+    setFormData({...formData, [name]: value})
+  } 
 ///Add ingredient input field
   function addIngredient(e) {
     e.preventDefault();
@@ -42,7 +55,7 @@ export default function RecipeForm () {
   }
 //watch for changes to ingredientObj, and update the formData with it
   
-
+//VALIDATION
   const throwErrors = (name, value) => {
     yup
       .reach(recipeSchema, name)
@@ -67,19 +80,10 @@ export default function RecipeForm () {
     setDisabled(!valid);
     })
   }, [formData])
+//END VALIDATION
 
-  function updateFormArray(e, index) {
-    const {name, value} = e.target;
-    const newArr = [...formData.name];
-    newArr[index] = value;
-    setFormData({...formData, [name]: newArr})
-  }
 
-  function updateForm(e) {
-    const {name, value} = e.target;
-    throwErrors(name, value);
-    setFormData({...formData, [name]: value})
-  }
+
   //Network Request
   function submit(e) {
     e.preventDefault()
@@ -100,9 +104,9 @@ export default function RecipeForm () {
         </label>
         <label>Category:&nbsp;
           <input type='text'
-                 name='category'
-                 value={formData.category}
-                 onChange={updateForm}
+                 name='categories'
+                 value={formData.categories[0]}
+                 onChange={(e) => updateFormArray(e, 0)}
           />
         </label>
         <label>Source:&nbsp;
@@ -138,7 +142,7 @@ export default function RecipeForm () {
                     cols='80'
                     name='instructions'
                     value={formData.instructions[0]}
-                    onChange={updateForm}
+                    onChange={e => updateFormArray(e, 0)}
           />
         </label>
       </div>
