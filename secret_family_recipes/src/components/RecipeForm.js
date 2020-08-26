@@ -10,7 +10,7 @@ import Ingredient from './Ingredient';
     'shared': false,
     'photo': '',
     'title': '',
-    'categories': [],
+    'categories': [''],
     'source': '',
     'ingredients': [defaultIngredientObj],
     'instructions': [''],
@@ -22,7 +22,14 @@ export default function RecipeForm () {
   const [formErrors, setFormErrors] = useState(['']);
   const [disabled, setDisabled] = useState(false);
   const [ingredientObj, setIngredientObj] = useState({defaultIngredientObj}); 
-
+  
+///Add ingredient input field
+  function addIngredient(e) {
+    e.preventDefault();
+    setFormData({...formData, 
+      'ingredients': [...formData.ingredients, 
+        defaultIngredientObj]})
+  } 
 ///get an updated array of ingredients without manipulating state
   function newIngredients(ingredientObj, index) {
     const result = [...formData.ingredients];
@@ -61,7 +68,12 @@ export default function RecipeForm () {
     })
   }, [formData])
 
-
+  function updateFormArray(e, index) {
+    const {name, value} = e.target;
+    const newArr = [...formData.name];
+    newArr[index] = value;
+    setFormData({...formData, [name]: newArr})
+  }
 
   function updateForm(e) {
     const {name, value} = e.target;
@@ -76,12 +88,6 @@ export default function RecipeForm () {
     ///////////////
   }
 
-  function addIngredient(e) {
-    e.preventDefault();
-    setFormData({...formData, 
-      'ingredients': [...formData.ingredients, 
-        defaultIngredientObj]})
-  } 
   return (
     <form className='recipeform' >
       <div className='meta'>
