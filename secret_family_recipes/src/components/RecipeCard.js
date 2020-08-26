@@ -14,17 +14,14 @@ import { connect } from "react-redux";
 
 function RecipeCard(props) {
   let {
-    
-   
     img_url,
     title,
     categories,
     source,
     ingredients,
     instructions,
-    
   } = props.item; //pass editable as true to have an edit button
- 
+
   const [edit, setEdit] = useState(false);
 
   //temp variables to reduce explosions, only show if not passed title
@@ -82,8 +79,7 @@ function RecipeCard(props) {
         {/* {editable && <button onClick={() => setEdit(true)}>[edit]</button>} */}
       </AccordionDetails>
     </Accordion>
-    
-    )
+  );
 }
 
 export default connect(null, { deleteRecipes, editRecipes, getRecipes })(

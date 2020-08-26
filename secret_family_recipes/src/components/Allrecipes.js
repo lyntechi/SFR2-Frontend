@@ -7,32 +7,31 @@ import RecipeCard from "./RecipeCard";
 // TO-DO:
 // 1. create filter function to filter recipe cards as input value changes
 
-
 const searchBarValue = " ";
 
 export default function AllRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [recipeList, setRecipeList] = useState([])
+  const [recipeList, setRecipeList] = useState([]);
 
-    // Getting all public recipe cards 
-  useEffect(()=> {
-      axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes')
-      .then(res => {
-        
-        setRecipeList(res.data.data) 
-        console.log(res.data.data) // returns array of objects w/recipe data
+  // Getting all public recipe cards
+  useEffect(() => {
+    axios
+      .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
+      .then((res) => {
+        setRecipeList(res.data.data);
+        console.log(res.data.data); // returns array of objects w/recipe data
       })
-      .catch(err => {
-          console.log(err)
-      })
-  }, [])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-// console.log(props.recipes) // returns empty array atm
+  // console.log(props.recipes) // returns empty array atm
 
   // Filter onChange Function
-//   const onRecipeFilterChange = (evt) => {
-//     const { } = evt.target
-//   }
+  //   const onRecipeFilterChange = (evt) => {
+  //     const { } = evt.target
+  //   }
 
   // Filtered results
   //   const filteredRecipes = allRecipes.filter((recipe) => {
@@ -50,9 +49,9 @@ export default function AllRecipes(props) {
         />
       </label>
       <div className="recipes container">
-          {recipeList.map((item) => {
-          return <RecipeCard item={item} key={item.id}/>
-      })}
+        {recipeList.map((item) => {
+          return <RecipeCard item={item} key={item.id} />;
+        })}
       </div>
     </>
   );

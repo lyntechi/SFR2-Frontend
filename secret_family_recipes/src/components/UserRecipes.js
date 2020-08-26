@@ -39,7 +39,7 @@ function UserRecipes(props) {
       </label>
       <div className="recipes container">
         {props.recipes.map((item) => {
-          console.log('recipes item', item)
+          console.log("recipes item", item);
           return (
             <RecipeCard
               item={item}

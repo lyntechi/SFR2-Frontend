@@ -11,7 +11,6 @@ const initialState = {
 };
 
 export const recipesReducer = (state = initialState, action) => {
- 
   switch (action.type) {
     case MAKING_CHANGES:
       return {
