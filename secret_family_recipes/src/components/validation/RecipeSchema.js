@@ -7,10 +7,8 @@ const recipeSchema = yup.object().shape({
   title: yup
     .string()
     .min(3, "Title must be at least 3 characters long.")
-    .required("A Title is Required"), 
-  categories: yup
-    .array()
-    .required("Must Include a category"),
+    .required("A Title is Required"),
+  categories: yup.array().required("Must Include a category"),
   ingredients: yup
     .array()
     .min(1, "You must include at least one Ingredient")
