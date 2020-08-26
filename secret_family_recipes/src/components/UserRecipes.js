@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import RecipeCard from "./RecipeCard";
-import { getRecipes, addRecipes } from "../actions/recipesActions";
+import RecipeCard from './RecipeCard';
+import axios from "axios";
+import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-import RecipeForm from "./RecipeForm";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import RecipeForm from './RecipeForm';
+
 
 // TO-DO:
 // 1. create an add (+) button which pops up a recipe form
@@ -12,6 +15,7 @@ const searchBarValue = " ";
 function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
   const [userRecipeList, setUserRecipeList] = useState([]);
+
 
   useEffect(() => {
     props.getRecipes();

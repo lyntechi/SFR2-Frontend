@@ -28,7 +28,10 @@ function RecipeForm(props) {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
-    setFormData({ ...formData, [name]: newArr });
+
+    throwErrors(name, value);
+    setFormData({...formData, [name]: newArr})
+
   }
 
   function updateForm(e) {
@@ -58,9 +61,11 @@ function RecipeForm(props) {
   }
   ///actually change the ingredients array in the form
   function updateIngredients(index, ingredientObj) {
+    const updatedIngredients = newIngredients(ingredientObj, index);
+    throwErrors('ingredients', updatedIngredients)
     setFormData({
       ...formData,
-      ingredients: newIngredients(ingredientObj, index),
+      ingredients: updatedIngredients
     });
   }
   //watch for changes to ingredientObj, and update the formData with it
@@ -74,9 +79,10 @@ function RecipeForm(props) {
         setFormErrors({
           ...formErrors,
           [name]: "",
-        });
+        })
       })
       .catch((err) => {
+        console.log(err);
         setFormErrors({
           ...formErrors,
           [name]: err.errors[0],
@@ -180,7 +186,7 @@ function RecipeForm(props) {
         </label>
       </div>
       <p>{formErrors.title}</p>
-      <p>{formErrors.category}</p>
+      <p>{formErrors.categories}</p>
       <p>{formErrors.ingredients}</p>
       <p>{formErrors.instructions}</p>
 

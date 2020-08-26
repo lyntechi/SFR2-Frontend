@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import "./styles/styles.scss";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Header from "./components/Header.js";
@@ -10,7 +10,9 @@ import { setLoggedIn, setLoggedOut } from "./actions/accountActions";
 import RedirectRoute from "./components/RedirectRoute";
 import { connect } from "react-redux";
 import AllRecipes from "./components/Allrecipes";
-import UserRecipes from "./components/UserRecipes"
+
+import UserRecipes from "./components/UserRecipes";
+
 
 function App(props) {
   useEffect(() => {
@@ -27,7 +29,9 @@ function App(props) {
       </header>
       <Switch>
         <RedirectRoute exact path="/" />
-        <PrivateRoute exact path="/UserRecipes" component={UserRecipes} />
+
+        <PrivateRoute exact path="/recipes" component={UserRecipes} />
+
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/logout" component={LogOutPage} />
