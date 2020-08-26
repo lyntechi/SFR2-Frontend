@@ -26,10 +26,8 @@ const defaultData = {
   function updateFormArray(e, index) {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
-    console.log(newArr);
     newArr[index] = value;
-    console.log(newArr);
-    setFormData({ ...formData, [name]: newArr });
+    setFormData({...formData, [name]: newArr})
   }
 
   function updateForm(e) {
@@ -45,7 +43,14 @@ const defaultData = {
       ingredients: [...formData.ingredients, defaultIngredientObj],
     });
   }
-  ///get an updated array of ingredients without manipulating state
+
+  function addCategory(e) {
+    e.preventDefault();
+    setFormData({...formData,
+      'categories': [...formData.categories, '']})
+  }
+
+///get an updated array of ingredients without manipulating state
   function newIngredients(ingredientObj, index) {
     const result = [...formData.ingredients];
     result[index] = ingredientObj;
@@ -107,15 +112,18 @@ const defaultData = {
             onChange={updateForm}
           />
         </label>
-       
-        <label>
-          Category:&nbsp;
-          <input
-            type="text"
-            name="categories"
-            value={formData.categories[0]}
-            onChange={(e) => updateFormArray(e, 0)}
-          />
+        <label>Categories:&nbsp;
+          {formData.categories.map((item, index) => {
+            return (
+              <input type='text'
+                     name='categories'
+                     value={formData.categories[index]}
+                     onChange={(e) => updateFormArray(e, index)}
+                     key={index} 
+              />
+            )
+          })}
+            <button onClick={addCategory}>Add</button>
         </label>
       
        
