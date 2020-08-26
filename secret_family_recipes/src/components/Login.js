@@ -123,12 +123,6 @@ function LoginForm(props) {
           Login
         </button>
       </div>
-
-      <div>
-        {/* <Route path='/Signup'> */}
-        <h4>Don't have an account? Sign Up Here!</h4>
-        {/* </Route> */}
-      </div>
     </form>
   );
 }

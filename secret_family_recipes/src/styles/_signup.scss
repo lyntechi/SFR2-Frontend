@@ -1,0 +1,58 @@
+$primaryTextColor: #FFF;
+$primaryFont: 'Dancing Script', cursive;
+
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.formContainer {
+    color: $primaryTextColor;
+    background-image: url('https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=387&q=80');
+    background-repeat:no-repeat;
+    background-size:cover;
+    width: 60%;
+    margin: auto;
+    padding: 5%;
+    text-align: center;
+
+.signUpTitle {
+    margin: auto;
+    margin-bottom: 5%;
+}
+.appName {
+    font-family: $primaryFont;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px #2A416F;
+    }
+}
+
+.formInputs {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    // border: 2px solid black;
+    border-radius: 1em;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: black;
+
+.inputLabels {
+    margin-bottom: 10%;
+}
+}
+
+.formSubmitContainer {
+    border: 2px solid red;
+    width: 50%;
+    margin: auto;
+    margin-top: 1%;
+    padding: 2%;
+
+#submitBtn {
+    padding: 5%;
+    border-radius: 1em;
+    background-color: $primaryTextColor;
+  
+}
+}
