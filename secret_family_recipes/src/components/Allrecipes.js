@@ -16,20 +16,24 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const searchBarValue = " ";
 
-function AllRecipes(props) {
+export default function AllRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
+  const [recipeList, setRecipeList] = useState([])
 
     // Getting all public recipe cards 
   useEffect(()=> {
       axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes')
       .then(res => {
-        console.log(res.data)
+        
+        setRecipeList(res.data.data) 
+        console.log(res.data.data) // returns array of objects w/recipe data
       })
       .catch(err => {
           console.log(err)
       })
-  })
+  }, [])
 
+// console.log(props.recipes) // returns empty array atm
 
   // Filter onChange Function
 //   const onRecipeFilterChange = (evt) => {
@@ -52,7 +56,7 @@ function AllRecipes(props) {
         />
       </label>
       <div className="recipes container">
-          {props.recipes.map((item) => {
+          {recipeList.map((item) => {
           return <RecipeCard item={item} />
       })}
       </div>
@@ -60,11 +64,11 @@ function AllRecipes(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    recipes: state.recipesReducer.recipes,
-    makingChanges: state.recipesReducer.makingChanges,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     recipes: state.recipesReducer.recipes,
+//     makingChanges: state.recipesReducer.makingChanges,
+//   };
+// };
 
-export default connect(mapStateToProps, { getRecipes })(AllRecipes);
+// export default connect(mapStateToProps, { getRecipes })(AllRecipes);
