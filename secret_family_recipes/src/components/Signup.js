@@ -6,6 +6,7 @@ import { useHistory, Link } from "react-router-dom";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 import { connect } from "react-redux";
 
+
 const initialFormValues = {
   username: "",
   password: "",
@@ -82,11 +83,13 @@ const initialDisabled = true;
 
   return (
     <>
-      <form className="form container" onSubmit={onSubmit}>
+      <form className="formContainer" onSubmit={onSubmit}>
+        <div className='formContent'>
+
         <div>
-          <h2>
+          <h2 className="signUpTitle">
             Sign Up for <br />
-            Secret Family Recipe
+            <span className="appName">Secret Family Recipe</span>
           </h2>
           {loginExists === false ? null : (
           <p className="error">Username is already taken. Try Again!</p>
@@ -97,8 +100,8 @@ const initialDisabled = true;
           <div className="error">{errors.password}</div>
         </div>
 
-        <div className="form inputs">
-          <label>
+        <div className="formInputs">
+          <label className="inputLabels">
             Username:&nbsp;
             <input
               name="username"
@@ -109,7 +112,7 @@ const initialDisabled = true;
             />
           </label>
 
-          <label>
+          <label className="inputLabels">
             Password:&nbsp;
             <input
               name="password"
@@ -120,17 +123,12 @@ const initialDisabled = true;
             />
           </label>
         </div>
-        <div className="form submit container">
+        <div className="formSubmitContainer">
           <button id="submitBtn" disabled={disabled}>
             Register
           </button>
         </div>
-
-        {/* <Route path='/Login' component={Login}> */}
-        <div>
-          <h4>Already have an account? <Link to="/login">Login Here!</Link></h4>
         </div>
-        {/* </Route> */}
       </form>
     </>
   );

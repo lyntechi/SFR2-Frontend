@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getRecipes } from "../actions/recipesActions";
-import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
-// This page will render a search bar at the top and recipe cards below
-// TO-DO:
-// 1. create filter function to filter recipe cards as input value changes
 
 const searchBarValue = " ";
 
@@ -26,18 +21,26 @@ export default function AllRecipes(props) {
       });
   }, []);
 
-  // console.log(props.recipes) // returns empty array atm
+const componentDidMount = () => {
+  setFilteredList(recipeList)
+}
 
-  // Filter onChange Function
-  //   const onRecipeFilterChange = (evt) => {
-  //     const { } = evt.target
-  //   }
+const handleChange = (evt) => {
+  let currentList = [];
+  let newList = [];
 
-  // Filtered results
-  //   const filteredRecipes = allRecipes.filter((recipe) => {
-  //     return recipe.title.toLowerCase().includes();
-  //   });
-
+  if(evt.target.value !== ''){
+    currentList = recipeList
+    newList = currentList.filter(item => {
+      const listItem = item.toLowerCase();
+      const searchTerm = evt.target.value.toLowerCase();
+      return listItem.includes(searchTerm);
+    })
+    else( newList = recipeList );
+    
+    setFilteredList(newList);
+  }
+}
   return (
     <>
       <label>
@@ -46,6 +49,7 @@ export default function AllRecipes(props) {
           // value=''
           placeholder="Search by keyword"
           // onChange={onRecipeFilterChange}
+          className="searchBar"
         />
       </label>
       <div className="recipes container">
@@ -57,11 +61,3 @@ export default function AllRecipes(props) {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     recipes: state.recipesReducer.recipes,
-//     makingChanges: state.recipesReducer.makingChanges,
-//   };
-// };
-
-// export default connect(mapStateToProps, { getRecipes })(AllRecipes);

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+$primaryTextColor: #FFF;
+$primaryFont: 'Dancing Script', cursive;
+$secondaryFont: 'Open Sans', sans-serif;
+
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.formContainerLogin {
+    color: $primaryTextColor;
+    background-image: url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: center;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 5%;
+    margin-top: 8%;
+    padding: 3%;
+    text-align: center;
+
+.signUpTitle {
+    margin: auto;
+    margin-bottom: 5%;
+    font-family: $secondaryFont;
+}
+.appName {
+    font-family: $primaryFont;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px #2A416F;
+    }
+}
+
+.formInputs {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    border-radius: 1em;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: black;
+
+.inputLabels {
+    margin-bottom: 10%;
+}
+}
+
+.formSubmitContainer {
+    width: 50%;
+    margin: auto;
+    margin-top: 1%;
+    padding: 2%;
+
+#submitBtn {
+    padding: 5%;
+    border-radius: 1em;
+    background-color: $primaryTextColor;
+&:hover {
+    background-color:rgb(179, 188, 199);
+}
+  
+}
+}

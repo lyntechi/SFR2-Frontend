@@ -89,12 +89,14 @@ useEffect(()=>{
   }, [login]);
 
   return (
-    <form className="form container" onSubmit={onLoginSubmit}>
+    <form className="formContainerLogin" onSubmit={onLoginSubmit}>
+      
+      <div className='formContent'>
       <div>
-        <h2>
+        <h2 className="signUpTitle">
           Login for
           <br />
-          Secret Family Recipe
+          <span className="appName">Secret Family Recipe</span>
         </h2>
         {doesntExist === false ? null : (
           <p className="error">Username doesnt exist!</p>
@@ -105,8 +107,8 @@ useEffect(()=>{
         <div className="error">{errors.password}</div>
       </div>
 
-      <div className="form inputs">
-        <label>
+      <div className="formInputs">
+        <label className="inputLabels">
           Username:&nbsp;
           <input
             name="username"
@@ -117,7 +119,7 @@ useEffect(()=>{
           />
         </label>
 
-        <label>
+        <label className="inputLabels">
           Password:&nbsp;
           <input
             name="password"
@@ -128,16 +130,11 @@ useEffect(()=>{
           />
         </label>
       </div>
-      <div className="form submit container">
+      <div className="formSubmitContainer">
         <button id="submitBtn" disabled={disabled}>
           Login
         </button>
       </div>
-
-      <div>
-        {/* <Route path='/Signup'> */}
-        <h4>Don't have an account? <Link to="/signup">Sign Up Here!</Link></h4>
-        {/* </Route> */}
       </div>
     </form>
   );
