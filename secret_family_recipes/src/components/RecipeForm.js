@@ -28,7 +28,10 @@ function RecipeForm(props) {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
-    setFormData({ ...formData, [name]: newArr });
+
+    throwErrors(name, value);
+    setFormData({...formData, [name]: newArr})
+
   }
 
   function updateForm(e) {
@@ -58,9 +61,11 @@ function RecipeForm(props) {
   }
   ///actually change the ingredients array in the form
   function updateIngredients(index, ingredientObj) {
+    const updatedIngredients = newIngredients(ingredientObj, index);
+    throwErrors('ingredients', updatedIngredients)
     setFormData({
       ...formData,
-      ingredients: newIngredients(ingredientObj, index),
+      ingredients: updatedIngredients
     });
   }
   //watch for changes to ingredientObj, and update the formData with it
@@ -74,9 +79,10 @@ function RecipeForm(props) {
         setFormErrors({
           ...formErrors,
           [name]: "",
-        });
+        })
       })
       .catch((err) => {
+        console.log(err);
         setFormErrors({
           ...formErrors,
           [name]: err.errors[0],
@@ -102,12 +108,21 @@ function RecipeForm(props) {
   return (
     <form className="recipeform">
       <div className="meta">
+        <h2>Add a Recipe</h2> 
         <label>
           Recipe Title:&nbsp;
           <input
             type="text"
             name="title"
             value={formData.title}
+            onChange={updateForm}
+          />
+        </label>
+        <label>Source:&nbsp;
+          <input 
+            type="text"
+            name="source"
+            value={formData.source}
             onChange={updateForm}
           />
         </label>
@@ -148,10 +163,10 @@ function RecipeForm(props) {
       </div>
       <div className="instructions">
         <label>
-          instructions:&nbsp;
+          Instructions:&nbsp;
           <textarea
             rows="7"
-            cols="80"
+            cols="70"
             name="instructions"
             value={formData.instructions[0]}
             onChange={(e) => updateFormArray(e, 0)}
@@ -161,26 +176,28 @@ function RecipeForm(props) {
       <div className="submission">
         <h3>Sharing:</h3>
         <label>
-          Public:
+          Public:&nbsp;
           <input
             name="shared"
             type="radio"
-            checked={formData.shared}
+            checked={formData.private}
             onChange={() => setFormData({ ...formData, private: true })}
           />
         </label>
-        <label>
-          Private:
-          <input
-            name="shared"
-            type="radio"
-            checked={!formData.shared}
-            onChange={() => setFormData({ ...formData, private: false })}
-          />
+        <label> 
+          <div className="sharing">
+            Private:&nbsp;
+            <input
+              name="shared"
+              type="radio"
+              checked={!formData.private}
+              onChange={() => setFormData({ ...formData, private: false })}
+            />
+          </div>
         </label>
       </div>
       <p>{formErrors.title}</p>
-      <p>{formErrors.category}</p>
+      <p>{formErrors.categories}</p>
       <p>{formErrors.ingredients}</p>
       <p>{formErrors.instructions}</p>
 

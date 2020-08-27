@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setLoggedIn, setLoggedOut, setUser } from "../actions/accountActions";
+
 
 const initialFormValues = {
   username: "",
@@ -135,7 +136,7 @@ useEffect(()=>{
 
       <div>
         {/* <Route path='/Signup'> */}
-        <h4>Don't have an account? Sign Up Here!</h4>
+        <h4>Don't have an account? <Link to="/signup">Sign Up Here!</Link></h4>
         {/* </Route> */}
       </div>
     </form>
