@@ -3,6 +3,7 @@ import * as yup from "yup";
 const recipeSchema = yup.object().shape({
   shared: yup.boolean(),
   photo: yup.string(),
+  source: yup.string().min(1, 'must include a source'),
   title: yup
     .string()
     .min(3, "Title must be at least 3 characters long.")

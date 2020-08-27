@@ -46,6 +46,7 @@ function UserRecipes(props) {
           console.log('recipes item', item)
           return (
             <RecipeCard
+              editable={true}
               item={item}
               key={item.id}
               makingChanges={props.makingChanges}

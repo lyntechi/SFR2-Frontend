@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import RecipeForm from "./RecipeForm";
+import EditForm from "./EditForm";
 import {
   Accordion,
   AccordionSummary,
@@ -16,19 +16,18 @@ import { connect } from "react-redux";
 
 function RecipeCard(props) {
   let {
-    
-   
     image_url,
     title,
     categories,
     source,
     ingredients,
-    instructions,
-    
+    instructions, 
   } = props.item; //pass editable as true to have an edit button
- 
+  const {editable} = props;
   const [edit, setEdit] = useState(false);
-
+  console.log('recipecardprops')
+  console.log(props);
+  
   //temp variables to reduce explosions, only show if not passed title
   // if (!props.title) {
   //   photo = 'https://images.unsplash.com/photo-1578895210405-907db486c111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=80'
@@ -46,7 +45,7 @@ function RecipeCard(props) {
   //If edit is true, show RecipeForm with all Values.
   if (edit) {
     return (
-      <RecipeForm
+      <EditForm
         // shared={shared}
         image_url={image_url}
         title={title}
@@ -85,7 +84,7 @@ function RecipeCard(props) {
           </ul>
         </div>
         <p>instructions{instructions}</p>
-        {/* {editable && <button onClick={() => setEdit(true)}>[edit]</button>} */}
+        {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
       </AccordionDetails>
     </Accordion>
     
