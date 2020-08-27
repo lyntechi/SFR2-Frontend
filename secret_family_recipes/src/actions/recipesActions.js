@@ -36,7 +36,8 @@ export const deleteRecipes = (recipeId) => (dispatch) => {
   axiosWithAuth()
     .delete(`/api/recipes/${recipeId}`)
     .then((res) => {
-      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
+      console.log("response is" + res);
+      //dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });
