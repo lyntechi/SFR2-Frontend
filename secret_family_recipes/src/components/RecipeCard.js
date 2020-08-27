@@ -12,7 +12,7 @@ import {
 //   getRecipes,
 // } from "../actions/recipesActions";
 import { connect } from "react-redux";
-
+import { deleteRecipes } from "../actions/recipesActions";
 
 function RecipeCard(props) {
 
@@ -25,6 +25,7 @@ function RecipeCard(props) {
     categories,
     source,
     ingredients,
+    id,
     instructions, 
   } = props.item; //pass editable as true to have an edit button
   const {editable} = props;
@@ -66,10 +67,10 @@ function RecipeCard(props) {
   return (
     <Accordion className="recipe-card">
       <AccordionSummary>
-        {(image_url != '' && 
+        {/* {(image_url != '' && 
           image_url != undefined) &&
           <img src={image_url} alt={"picture of " + title} />
-        }
+        } */}
         <h3>
           {title}, from <span className="card-source">{source}</span>
         </h3>
@@ -89,11 +90,12 @@ function RecipeCard(props) {
         </div>
         <p>instructions{instructions}</p>
         {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
+        {editable && <button onClick={''} >[delete]</button>}
       </AccordionDetails>
     </Accordion>
   );
 }
 
-export default connect(null,{})(
+export default connect(null,{ deleteRecipes })(
   RecipeCard
 );

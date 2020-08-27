@@ -28,10 +28,8 @@ function RecipeForm(props) {
     const { name, value } = e.target;
     const newArr = [...formData[name]];
     newArr[index] = value;
-
     throwErrors(name, value);
     setFormData({...formData, [name]: newArr})
-
   }
 
   function updateForm(e) {

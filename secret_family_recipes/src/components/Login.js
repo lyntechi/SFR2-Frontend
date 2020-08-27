@@ -43,7 +43,7 @@ useEffect(()=>{
         props.setLoggedIn();
         localStorage.setItem("token", res.data.data.token);
         props.setUser(res.data.data.user)
-        history.push("/UserRecipes");
+        history.push("/recipes");
       })
       .catch((err) => {
         console.log("error happend with post request", err);
