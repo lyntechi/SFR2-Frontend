@@ -6,16 +6,16 @@ import Ingredient from "./Ingredient";
 import { addRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
 
-const defaultIngredientObj = { ingredient: "cheese", quantity: "1" };
+const defaultIngredientObj = { ingredient: "", quantity: "" };
 
 const defaultData = {
   private: false,
   image_url: "",
-  title: "chicken parm",
-  categories: ["chicken"],
-  source: "aunt",
+  title: "",
+  categories: [""],
+  source: "",
   ingredients: [defaultIngredientObj],
-  instructions: ["test"],
+  instructions: [""],
 };
 
 function RecipeForm(props) {
@@ -100,6 +100,7 @@ function RecipeForm(props) {
   function submit(e) {
     e.preventDefault();
     props.addRecipes(formData);
+    setFormData(defaultData)
     // setEdit(false);
   }
 
@@ -149,7 +150,6 @@ function RecipeForm(props) {
               <Ingredient
                 item={item}
                 updateForm={updateForm}
-                add={addIngredient}
                 key={index}
                 index={index}
                 updateIngredients={updateIngredients}

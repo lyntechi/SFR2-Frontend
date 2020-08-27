@@ -16,7 +16,7 @@ in my head, let alone clear in the code (it still isn't)
 
 */
 export default function Ingredient(props) {
-  const { add, index, item, updateIngredients } = props;
+  const { index, item, updateIngredients } = props;
   const [ingredientObj, setIngredientObj] = useState({
     ingredient: item.ingredient,
     quantity: item.quantity,
@@ -38,14 +38,12 @@ export default function Ingredient(props) {
         placeholder="ingredient"
         value={ingredientObj.ingredient}
         onChange={updateIngredientObj}
-        onKeyDown={(e) => e.which === 13 && add}
         name="ingredient"
       />
       <input
         type="text"
         placeholder="quantity"
         value={ingredientObj.quantity}
-        onKeyDown={(e) => e.which === 13 && add}
         onChange={updateIngredientObj}
         name="quantity"
       />
