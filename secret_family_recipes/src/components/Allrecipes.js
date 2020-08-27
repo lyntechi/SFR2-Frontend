@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 
-const searchBarValue = " ";
 
 export default function AllRecipes(props) {
-  const [searchBar, setSearchBar] = useState(searchBarValue);
   const [recipeList, setRecipeList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Getting all public recipe cards
   useEffect(() => {
@@ -21,43 +21,46 @@ export default function AllRecipes(props) {
       });
   }, []);
 
-const componentDidMount = () => {
-  setFilteredList(recipeList)
-}
 
 const handleChange = (evt) => {
   let currentList = [];
   let newList = [];
 
   if(evt.target.value !== ''){
-    currentList = recipeList
+    // debugger
+    currentList = recipeList;
     newList = currentList.filter(item => {
-      const listItem = item.toLowerCase();
-      const searchTerm = evt.target.value.toLowerCase();
+      let listItem = item.title.toLowerCase();
+      let searchTerm = evt.target.value.toLowerCase();
       return listItem.includes(searchTerm);
-    })
-    else( newList = recipeList );
-    
+    });
+  }else {
+      newList = recipeList; 
+  };
     setFilteredList(newList);
   }
-}
+
   return (
     <>
-      <label>
         <input
           type="text"
-          // value=''
+          // value={}
           placeholder="Search by keyword"
-          // onChange={onRecipeFilterChange}
+          onChange={handleChange}
           className="searchBar"
         />
-      </label>
-      <div className="recipes container">
+
+      {/* <div className="recipes container">
           {recipeList.map((item) => {
-          return <RecipeCard editable={false} item={item} key={item.id}/>
+          return <RecipeCard editable={false} item={item} key={item.id} filteredList={handleChange}/>
       })}
+      </div> */}
+      <div className="filteredRecipes container">
+        {filteredList.map((item) => {
+            return <RecipeCard editable={false} item={item} key={item.id}/>
+        })}
       </div>
+ 
     </>
   );
 }
-
