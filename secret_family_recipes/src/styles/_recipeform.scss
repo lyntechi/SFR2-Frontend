@@ -1,11 +1,33 @@
 /*This doesn't belong here, I accidnetly started
 styling the card, because that's how genius I am */
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+$primaryTextColor: #FFF;
+$primaryFont: 'Dancing Script', cursive;
+$secondaryFont: 'Open Sans', sans-serif;
+
+@mixin inputStyle() {
+  background-color: #f5f5f5;
+  border: 1px solid #CCD1D1;
+  border-radius: .25rem;
+  padding: 2%;
+  &:hover, &:focus {
+    border: 1px solid #2A416F;
+    background-color: #ffffff;
+    }
+};
+
 .recipeform {
+  border: 2px solid black;
   margin: auto;
+  margin-bottom: 5%;
+  padding-bottom: 3%;
   display: flex;
   flex-flow: column;
   max-width: 80%;
+  border-radius: 2em;
+  background-color: rgba(86, 101, 115, 0.5);
   p { margin: 0; }
   h3 { text-align: center;
        font-size: 1.5em;
@@ -15,14 +37,16 @@ styling the card, because that's how genius I am */
     h2 { 
       text-align: center;
       flex-basis: 100%; }
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     label {
       display: flex;
-      flex-flow: row nowrap;
+      // flex-flow: row nowrap; // prevents additional
+      // catorgories being added splling off sides of page
       input {
-        width: 10em;
+        width: 10em; // don't change
+        @include inputStyle();
       }
     }
   }
@@ -35,7 +59,11 @@ styling the card, because that's how genius I am */
       flex-flow: column wrap;
       justify-content: center;
       font-weight: 600;
-
+      
+      input[name='ingredient']{
+        @include inputStyle();
+       
+      }
       input[name='quantity'] {
         width: 4em;
       }
@@ -44,6 +72,24 @@ styling the card, because that's how genius I am */
     display: flex;
     flex-flow: row nowrap;
   }
-  button { max-width: 300px;
-           align-self: center; }
+  button { 
+    align-self: center;
+    // box-shadow: 0px 10px 14px -7px #276873;
+    // background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    background-color:#599bb3;
+    border-radius: .25rem;
+    cursor: pointer;
+    color:#ffffff;
+    font-family: $secondaryFont;
+    font-weight: bold;
+    text-decoration:none;
+
+  }
+
+  .ingredLabel {
+    display: flex;
+    flex-direction: row;
+    margin: 5% 0;
+    width: 80%;
+  }
 }

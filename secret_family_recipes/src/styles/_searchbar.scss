@@ -1,0 +1,24 @@
+
+* {
+    box-sizing: border-box;
+}
+
+.searchContainer{
+    position: relative;
+    width: 50%;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 5%;
+  
+.searchBar {
+    border: 1px solid #CCD1D1;
+    border-radius: .25rem;
+    padding: 2%;
+    width: 100%;
+    background-color: #f5f5f5;
+&:hover, &:focus {
+    border: 1px solid #2A416F;
+    background-color: #ffffff;
+    }
+}
+}

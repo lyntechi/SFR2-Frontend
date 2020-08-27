@@ -141,7 +141,7 @@ function RecipeForm(props) {
         </label>
       </div>
       <div className="ingredients">
-        <label>
+        <label className="ingredLabel">
           Ingredients:&nbsp;
           {/*<Ingredient />*/}
           {formData.ingredients.map((item, index) => {

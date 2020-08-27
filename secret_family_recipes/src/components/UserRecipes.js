@@ -40,6 +40,7 @@ if(searchTerm !== ''){
 
   return (
     <>
+    <div className='searchContainer'>
         <input
           type="text"
           value={searchTerm}
@@ -47,6 +48,8 @@ if(searchTerm !== ''){
           onChange={handleChange}
           className="searchBar"
         />
+      </div>
+      
       <div className="userRecipes container">
         {filteredList.map((item) => {
           return (
