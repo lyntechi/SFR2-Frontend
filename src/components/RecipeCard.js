@@ -63,8 +63,8 @@ function RecipeCard(props) {
   return (
     <Accordion className="recipe-card">
       <AccordionSummary>
-        {(image_url != '' && 
-          image_url != undefined) &&
+        {(image_url !== '' && 
+          image_url !== undefined) &&
           <img src={image_url} alt={"picture of " + title} />
         }
         <h3>

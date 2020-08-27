@@ -20,7 +20,7 @@ const initialUser = [];
 const initialDisabled = true;
 
   function SignupForm(props) {
-  const [users, setUsers] = useState(initialUser);
+  // const [users, setUsers] = useState(initialUser);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -42,10 +42,10 @@ const initialDisabled = true;
       .catch(error=>{
         setLoginExists(true);
       })
-    const newUser = {
-      username: formValues.username.trim(),
-      password: formValues.password.trim(),
-    };
+    // const newUser = {
+    //   username: formValues.username.trim(),
+    //   password: formValues.password.trim(),
+    // };
   };
 
   // YUP VALIDATIONS
