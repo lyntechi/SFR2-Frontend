@@ -2,6 +2,7 @@ import {
   LOG_ERROR,
   UPDATE_RECIPES,
   MAKING_CHANGES,
+  ADD_RECIPE
 } from "../actions/recipesActions";
 
 const initialState = {
@@ -20,12 +21,15 @@ export const recipesReducer = (state = initialState, action) => {
     case UPDATE_RECIPES:
       return {
         ...state,
-        recipes: [action.payload, ...state.recipes],
-
+        recipes: action.payload,
         message: "",
         makingChanges: false,
       };
-
+      case ADD_RECIPE:
+        return{ 
+          ...state,
+          recipes: [...state.recipes, action.payload]
+        }
     case LOG_ERROR:
       return {
         ...state,

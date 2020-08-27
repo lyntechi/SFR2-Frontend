@@ -14,9 +14,10 @@ function UserRecipes(props) {
   const [userRecipeList, setUserRecipeList] = useState([]);
 
   useEffect(() => {
-    props.getRecipes();
+    props.getRecipes(props.user.id);
+    
   }, []);
-
+console.log('props user',props.user)
   // For SEARCHBAR: Filter onChange Function
   //   const onRecipeFilterChange = (evt) => {
   //     const { } = evt.target
@@ -39,7 +40,6 @@ function UserRecipes(props) {
       </label>
       <div className="recipes container">
         {props.recipes.map((item) => {
-          console.log("recipes item", item);
           return (
             <RecipeCard
               item={item}
@@ -61,6 +61,7 @@ const mapStateToProps = (state) => {
   return {
     recipes: state.recipesReducer.recipes,
     makingChanges: state.recipesReducer.makingChanges,
+    user: state.accountReducer.user
   };
 };
 

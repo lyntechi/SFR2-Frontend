@@ -4,7 +4,7 @@ import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
+import { setLoggedIn, setLoggedOut, setUser } from "../actions/accountActions";
 
 const initialFormValues = {
   username: "",
@@ -25,6 +25,14 @@ function LoginForm(props) {
   const [doesntExist, setDoesntExist] = useState(false);
   const history = useHistory();
 
+
+
+useEffect(()=>{
+  setLoggedIn()
+  setLoggedOut()
+},[])
+
+
   // FORM FUNCTIONS
   const onLoginSubmit = (evt) => {
     evt.preventDefault();
@@ -33,6 +41,7 @@ function LoginForm(props) {
       .then((res) => {
         props.setLoggedIn();
         localStorage.setItem("token", res.data.data.token);
+        props.setUser(res.data.data.user)
         history.push("/UserRecipes");
       })
       .catch((err) => {
@@ -71,7 +80,7 @@ function LoginForm(props) {
       [name]: value,
     });
   };
-
+ 
   useEffect(() => {
     validationSchema.isValid(login).then((valid) => {
       setDisabled(!valid);
@@ -138,6 +147,6 @@ const mapStateToProps = (state) => {
     loggedIn: state.accountReducer.loggedIn,
   };
 };
-export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(
+export default connect(mapStateToProps, { setLoggedIn, setLoggedOut, setUser })(
   LoginForm
 );

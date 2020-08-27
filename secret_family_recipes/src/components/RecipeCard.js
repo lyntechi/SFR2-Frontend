@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeForm from "./RecipeForm";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@material-ui/core";
-import {
-  deleteRecipes,
-  editRecipes,
-  getRecipes,
-} from "../actions/recipesActions";
+// import {
+//   deleteRecipes,
+//   editRecipes,
+//   getRecipes,
+// } from "../actions/recipesActions";
 import { connect } from "react-redux";
 
 function RecipeCard(props) {
+
+
+
+
   let {
     img_url,
     title,
@@ -21,8 +25,13 @@ function RecipeCard(props) {
     ingredients,
     instructions,
   } = props.item; //pass editable as true to have an edit button
-
+  
   const [edit, setEdit] = useState(false);
+
+
+  useEffect(() => {
+    
+  },[])
 
   //temp variables to reduce explosions, only show if not passed title
   // if (!props.title) {
@@ -39,20 +48,20 @@ function RecipeCard(props) {
   // }
 
   //If edit is true, show RecipeForm with all Values.
-  if (edit) {
-    return (
-      <RecipeForm
-        // shared={shared}
-        img_url={img_url}
-        title={title}
-        categories={categories}
-        source={source}
-        ingredients={ingredients}
-        instructions={instructions}
-        setEdit={setEdit}
-      />
-    );
-  }
+  // if (edit) {
+  //   return (
+  //     <RecipeForm
+  //       // shared={shared}
+  //       img_url={img_url}
+  //       title={title}
+  //       categories={categories}
+  //       source={source}
+  //       ingredients={ingredients}
+  //       instructions={instructions}
+  //       setEdit={setEdit}
+  //     />
+  //   );
+  // }
 
   return (
     <Accordion className="recipe-card">
@@ -82,6 +91,6 @@ function RecipeCard(props) {
   );
 }
 
-export default connect(null, { deleteRecipes, editRecipes, getRecipes })(
+export default connect(null,{})(
   RecipeCard
 );

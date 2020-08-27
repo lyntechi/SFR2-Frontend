@@ -19,7 +19,7 @@ export default function AllRecipes(props) {
       .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
       .then((res) => {
         setRecipeList(res.data.data);
-        console.log(res.data.data); // returns array of objects w/recipe data
+        // returns array of objects w/recipe data
       })
       .catch((err) => {
         console.log(err);
