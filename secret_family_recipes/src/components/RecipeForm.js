@@ -118,6 +118,14 @@ function RecipeForm(props) {
             onChange={updateForm}
           />
         </label>
+        <label>Source:&nbsp;
+          <input 
+            type="text"
+            name="source"
+            value={formData.source}
+            onChange={updateForm}
+          />
+        </label>
         <label>
           Categories:&nbsp;
           {formData.categories.map((item, index) => {
@@ -168,7 +176,7 @@ function RecipeForm(props) {
       <div className="submission">
         <h3>Sharing:</h3>
         <label>
-          Public:
+          Public:&nbsp;
           <input
             name="shared"
             type="radio"
@@ -178,7 +186,7 @@ function RecipeForm(props) {
         </label>
         <label> 
           <div className="sharing">
-            Private:
+            Private:&nbsp;
             <input
               name="shared"
               type="radio"

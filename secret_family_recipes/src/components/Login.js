@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
+
 
 const initialFormValues = {
   username: "",
@@ -33,7 +34,7 @@ function LoginForm(props) {
       .then((res) => {
         props.setLoggedIn();
         localStorage.setItem("token", res.data.data.token);
-        history.push("/UserRecipes");
+        history.push("/recipes");
       })
       .catch((err) => {
         console.log("error happend with post request", err);
@@ -126,7 +127,7 @@ function LoginForm(props) {
 
       <div>
         {/* <Route path='/Signup'> */}
-        <h4>Don't have an account? Sign Up Here!</h4>
+        <h4>Don't have an account? <Link to="/signup">Sign Up Here!</Link></h4>
         {/* </Route> */}
       </div>
     </form>

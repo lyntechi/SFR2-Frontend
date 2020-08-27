@@ -18,7 +18,7 @@ function RecipeCard(props) {
   let {
     
    
-    img_url,
+    image_url,
     title,
     categories,
     source,
@@ -48,7 +48,7 @@ function RecipeCard(props) {
     return (
       <RecipeForm
         // shared={shared}
-        img_url={img_url}
+        image_url={image_url}
         title={title}
         categories={categories}
         source={source}
@@ -58,11 +58,15 @@ function RecipeCard(props) {
       />
     );
   }
+        console.log('image is ' +image_url);
 
   return (
     <Accordion className="recipe-card">
       <AccordionSummary>
-        <img src={img_url} alt={"picture of " + title} />
+        {(image_url != '' && 
+          image_url != undefined) &&
+          <img src={image_url} alt={"picture of " + title} />
+        }
         <h3>
           {title}, from <span className="card-source">{source}</span>
         </h3>
@@ -80,7 +84,7 @@ function RecipeCard(props) {
               })}
           </ul>
         </div>
-        <p>{instructions}</p>
+        <p>instructions{instructions}</p>
         {/* {editable && <button onClick={() => setEdit(true)}>[edit]</button>} */}
       </AccordionDetails>
     </Accordion>

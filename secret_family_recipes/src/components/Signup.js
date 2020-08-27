@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 import { connect } from "react-redux";
 
@@ -128,7 +128,7 @@ const initialDisabled = true;
 
         {/* <Route path='/Login' component={Login}> */}
         <div>
-          <h4>Already have an account? Login Here!</h4>
+          <h4>Already have an account? <Link to="/login">Login Here!</Link></h4>
         </div>
         {/* </Route> */}
       </form>
