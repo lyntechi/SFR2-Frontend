@@ -111,7 +111,7 @@ function RecipeForm(props) {
   function submit(e) {
     e.preventDefault();
     props.addRecipes(formData);
-    // setEdit(false);
+    setEdit(false);
   }
 
   return (
