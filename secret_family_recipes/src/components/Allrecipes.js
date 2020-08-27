@@ -7,7 +7,8 @@ const searchBarValue = " ";
 
 export default function AllRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [recipeList, setRecipeList] = useState([])
+  const [recipeList, setRecipeList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
 
     // Getting all public recipe cards 
   useEffect(()=> {
@@ -21,18 +22,26 @@ export default function AllRecipes(props) {
       })
   }, [])
 
-// debugger
-  // Filter onChange Function
-  const onRecipeFilterChange = (evt) => {
-     const { name, value } = evt.target
-   
+const componentDidMount = () => {
+  setFilteredList(recipeList)
+}
+
+const handleChange = (evt) => {
+  let currentList = [];
+  let newList = [];
+
+  if(evt.target.value !== ''){
+    currentList = recipeList
+    newList = currentList.filter(item => {
+      const listItem = item.toLowerCase();
+      const searchTerm = evt.target.value.toLowerCase();
+      return listItem.includes(searchTerm);
+    })
+    else( newList = recipeList );
+    
+    setFilteredList(newList);
   }
-
-  // // Filtered results
-  //   const filteredRecipes = allRecipes.filter((recipe) => {
-  //     return recipe.title.toLowerCase().includes();
-  //   });
-
+}
   return (
     <>
       <label>
