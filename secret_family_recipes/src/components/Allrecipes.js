@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getRecipes } from "../actions/recipesActions";
-import { connect } from "react-redux";
 import RecipeCard from "./RecipeCard";
-// This page will render a search bar at the top and recipe cards below
-// TO-DO:
-// 1. create filter function to filter recipe cards as input value changes
 
 
 const searchBarValue = " ";
@@ -18,23 +13,22 @@ export default function AllRecipes(props) {
   useEffect(()=> {
       axios.get('https://secret-fam-recipe.herokuapp.com/api/recipes')
       .then(res => {
-        
         setRecipeList(res.data.data) 
-        console.log(res.data.data) // returns array of objects w/recipe data
+        // console.log(res.data.data) // returns array of objects w/recipe data
       })
       .catch(err => {
           console.log(err)
       })
   }, [])
 
-// console.log(props.recipes) // returns empty array atm
-
+// debugger
   // Filter onChange Function
-//   const onRecipeFilterChange = (evt) => {
-//     const { } = evt.target
-//   }
+  const onRecipeFilterChange = (evt) => {
+     const { name, value } = evt.target
+   
+  }
 
-  // Filtered results
+  // // Filtered results
   //   const filteredRecipes = allRecipes.filter((recipe) => {
   //     return recipe.title.toLowerCase().includes();
   //   });
@@ -47,22 +41,15 @@ export default function AllRecipes(props) {
           // value=''
           placeholder="Search by keyword"
           // onChange={onRecipeFilterChange}
+          className="searchBar"
         />
       </label>
       <div className="recipes container">
           {recipeList.map((item) => {
-          return <RecipeCard item={item} />
+          return <RecipeCard item={item} key={item.id} />
       })}
       </div>
     </>
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     recipes: state.recipesReducer.recipes,
-//     makingChanges: state.recipesReducer.makingChanges,
-//   };
-// };
-
-// export default connect(mapStateToProps, { getRecipes })(AllRecipes);
