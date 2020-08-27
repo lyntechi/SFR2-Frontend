@@ -7,7 +7,7 @@ function Header(props) {
   return (
     <header>
       {!props.loggedIn && (
-        <>
+        <div className="navLinks">
           <Link to="/login" id="loginLink">
             <h2>Login</h2>
           </Link>
@@ -17,7 +17,7 @@ function Header(props) {
           <Link to="/allrecipes" id="allRecipesLink">
             <h2>All Recipes</h2>
           </Link>
-        </>
+        </div>
       )}
       {props.loggedIn && (
         <>
