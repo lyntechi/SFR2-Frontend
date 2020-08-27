@@ -14,6 +14,7 @@ export default function AllRecipes(props) {
       .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
       .then((res) => {
         setRecipeList(res.data.data);
+        // setFilteredList(res.data.data);
         // returns array of objects w/recipe data
       })
       .catch((err) => {
@@ -21,40 +22,37 @@ export default function AllRecipes(props) {
       });
   }, []);
 
+  const handleChange = (evt) => {
+    setSearchTerm(evt.target.value.toLowerCase());
+  }
 
-const handleChange = (evt) => {
+  useEffect(()=> {
   let currentList = [];
   let newList = [];
 
-  if(evt.target.value !== ''){
+  if(searchTerm !== ''){
     // debugger
     currentList = recipeList;
     newList = currentList.filter(item => {
       let listItem = item.title.toLowerCase();
-      let searchTerm = evt.target.value.toLowerCase();
       return listItem.includes(searchTerm);
     });
   }else {
       newList = recipeList; 
   };
     setFilteredList(newList);
-  }
+  }, [searchTerm, recipeList])
 
+  console.log(filteredList)
   return (
     <>
         <input
           type="text"
-          // value={}
+          value={searchTerm}
           placeholder="Search by keyword"
           onChange={handleChange}
           className="searchBar"
         />
-
-      {/* <div className="recipes container">
-          {recipeList.map((item) => {
-          return <RecipeCard editable={false} item={item} key={item.id} filteredList={handleChange}/>
-      })}
-      </div> */}
       <div className="filteredRecipes container">
         {filteredList.map((item) => {
             return <RecipeCard editable={false} item={item} key={item.id}/>
