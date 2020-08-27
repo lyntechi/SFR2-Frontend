@@ -31,7 +31,6 @@ export default function AllRecipes(props) {
   let newList = [];
 
   if(searchTerm !== ''){
-    // debugger
     currentList = recipeList;
     newList = currentList.filter(item => {
       let listItem = item.title.toLowerCase();
@@ -43,7 +42,6 @@ export default function AllRecipes(props) {
     setFilteredList(newList);
   }, [searchTerm, recipeList])
 
-  console.log(filteredList)
   return (
     <>
         <input
@@ -55,7 +53,13 @@ export default function AllRecipes(props) {
         />
       <div className="filteredRecipes container">
         {filteredList.map((item) => {
-            return <RecipeCard editable={false} item={item} key={item.id}/>
+            return ( 
+            <RecipeCard 
+              editable={false} 
+              item={item} 
+              key={item.id}
+            />
+          );
         })}
       </div>
  

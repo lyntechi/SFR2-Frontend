@@ -7,43 +7,48 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import RecipeForm from './RecipeForm';
 
 
-// TO-DO:
-// 1. create an add (+) button which pops up a recipe form
-
-const searchBarValue = " ";
-
 function UserRecipes(props) {
-  const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState([]);
-
+  // const [userRecipeList, setUserRecipeList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     props.getRecipes(props.user.id);
     
   }, []);
-console.log('props user',props.user)
-  // For SEARCHBAR: Filter onChange Function
-  //   const onRecipeFilterChange = (evt) => {
-  //     const { } = evt.target
-  //   }
+// console.log('props user',props.user)
 
-  // For SEARCHBAR: Filtered results
-  //   const filteredRecipes = allRecipes.filter((recipe) => {
-  //     return recipe.title.toLowerCase().includes();
-  //   });
+const handleChange = (evt) => {
+  setSearchTerm(evt.target.value.toLowerCase());
+}
+
+useEffect(()=> {
+let currentList = [];
+let newList = [];
+
+if(searchTerm !== ''){
+  currentList = props.recipes;
+  newList = currentList.filter(item => {
+    let listItem = item.title.toLowerCase();
+    return listItem.includes(searchTerm);
+  });
+}else {
+    newList = props.recipes; 
+};
+  setFilteredList(newList);
+}, [searchTerm, props.recipes])
 
   return (
     <>
-      <label>
         <input
           type="text"
-          // value=''
+          value={searchTerm}
           placeholder="Search by keyword"
-          // onChange={onRecipeFilterChange}
+          onChange={handleChange}
+          className="searchBar"
         />
-      </label>
-      <div className="recipes container">
-        {props.recipes.map((item) => {
+      <div className="userRecipes container">
+        {filteredList.map((item) => {
           return (
             <RecipeCard
               editable={true}
