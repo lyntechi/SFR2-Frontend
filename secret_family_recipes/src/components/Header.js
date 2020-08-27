@@ -24,7 +24,7 @@ function Header(props) {
           <Link to="/allrecipes" id="allRecipesLink">
             <h2>All Recipes</h2>
           </Link>
-          <Link to="/userRecipes" id="signUpLink">
+          <Link to="/recipes" id="userRecipes">
             <h2>Private Recipes</h2>
           </Link>
           <Link to="/logout" id="signUpLink">
