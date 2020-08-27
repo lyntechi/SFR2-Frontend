@@ -1,4 +1,3 @@
-h3 {font-size: 1em}
 /*This doesn't belong here, I accidnetly started
 styling the card, because that's how genius I am */
 .recipe-card {
@@ -7,6 +6,40 @@ styling the card, because that's how genius I am */
   display: flex;
 }
 
-.card-ingredients { 
+
+.recipeform {
+  margin: auto;
+  display: flex;
+  flex-flow: column;
+  max-width: 80%;
+  p { margin: 0; }
+  h3 { text-align: center;}
+  .meta {
+    h2 { 
+      text-align: center;
+      flex-basis: 100%; }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    label {
+      display: flex;
+      flex-flow: row nowrap;
+      input {
+        width: 10em;
+      }
+    }
   }
-.recipeform { } 
+  .ingredients {
+    display: flex;
+    justify-content: center;
+  }   
+  label {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+
+      input[name='quantity'] {
+        width: 4em;
+      }
+    }
+}

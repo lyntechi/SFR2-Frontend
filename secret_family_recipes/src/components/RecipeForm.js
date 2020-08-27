@@ -109,6 +109,7 @@ const defaultData = {
   return (
     <form className="recipeform">
       <div className="meta">
+        <h2>Add a Recipe</h2> 
         <label>
           Recipe Title:&nbsp;
           <input
@@ -155,10 +156,10 @@ const defaultData = {
       </div>
       <div className="instructions">
         <label>
-          instructions:&nbsp;
+          Instructions:&nbsp;
           <textarea
             rows="7"
-            cols="80"
+            cols="70"
             name="instructions"
             value={formData.instructions[0]}
             onChange={(e) => updateFormArray(e, 0)}
@@ -172,18 +173,20 @@ const defaultData = {
           <input
             name="shared"
             type="radio"
-            checked={formData.shared}
+            checked={formData.private}
             onChange={() => setFormData({ ...formData, private: true })}
           />
         </label>
-        <label>
-          Private:
-          <input
-            name="shared"
-            type="radio"
-            checked={!formData.shared}
-            onChange={() => setFormData({ ...formData, private: false })}
-          />
+        <label> 
+          <div className="sharing">
+            Private:
+            <input
+              name="shared"
+              type="radio"
+              checked={!formData.private}
+              onChange={() => setFormData({ ...formData, private: false })}
+            />
+          </div>
         </label>
       </div>
       <p>{formErrors.title}</p>

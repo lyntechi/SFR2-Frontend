@@ -14,7 +14,7 @@ const searchBarValue = " ";
 
 function UserRecipes(props) {
   const [searchBar, setSearchBar] = useState(searchBarValue);
-  const [userRecipeList, setUserRecipeList] = useState(props.getRecipes());
+  const [userRecipeList, setUserRecipeList] = useState([]);
 
 
   useEffect(() => {
@@ -69,6 +69,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getRecipes })(
+export default connect(mapStateToProps, { getRecipes })
+(
   UserRecipes
 );
