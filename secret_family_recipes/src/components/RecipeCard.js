@@ -1,6 +1,9 @@
 
 import React, { useState } from "react";
 import EditForm from "./EditForm";
+import { connect } from "react-redux";
+import { deleteRecipes } from "../actions/recipesActions";
+import { tempData } from './tempData'
 import {
   Accordion,
   AccordionSummary,
@@ -11,13 +14,7 @@ import {
 //   editRecipes,
 //   getRecipes,
 // } from "../actions/recipesActions";
-import { connect } from "react-redux";
-import { deleteRecipes } from "../actions/recipesActions";
-
 function RecipeCard(props) {
-
-
-
 
   let {
     image_url,
@@ -27,14 +24,12 @@ function RecipeCard(props) {
     ingredients,
     id,
     instructions, 
-  } = props.item; //pass editable as true to have an edit button
+  } = (props.ingredients) ? props.item : tempData(); //pass editable as true to have an edit button
   const {editable} = props;
   const [edit, setEdit] = useState(false);
-  console.log('recipecardprops')
-  console.log(props);
   
-  //temp variables to reduce explosions, only show if not passed title
-  // if (!props.title) {
+
+  //temp since we aren't getting back what we need.
   //   photo = 'https://images.unsplash.com/photo-1578895210405-907db486c111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=80'
   //   ingredients = [
   //       {'ingredient': 'apples', 'quantity': '3'},

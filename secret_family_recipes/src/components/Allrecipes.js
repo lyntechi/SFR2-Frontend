@@ -22,6 +22,7 @@ export default function AllRecipes(props) {
       });
   }, []);
 
+  console.log(recipeList);
   const handleChange = (evt) => {
     setSearchTerm(evt.target.value.toLowerCase());
   }
