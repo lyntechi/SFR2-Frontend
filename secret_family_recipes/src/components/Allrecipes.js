@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 
-const searchBarValue = " ";
 
 export default function AllRecipes(props) {
-  const [searchBar, setSearchBar] = useState(searchBarValue);
   const [recipeList, setRecipeList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Getting all public recipe cards
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function AllRecipes(props) {
       .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
       .then((res) => {
         setRecipeList(res.data.data);
+        // setFilteredList(res.data.data);
         // returns array of objects w/recipe data
       })
       .catch((err) => {
@@ -21,43 +22,43 @@ export default function AllRecipes(props) {
       });
   }, []);
 
-const componentDidMount = () => {
-  setFilteredList(recipeList)
-}
+  const handleChange = (evt) => {
+    setSearchTerm(evt.target.value.toLowerCase());
+  }
 
-const handleChange = (evt) => {
+  useEffect(()=> {
   let currentList = [];
   let newList = [];
 
-  if(evt.target.value !== ''){
-    currentList = recipeList
+  if(searchTerm !== ''){
+    // debugger
+    currentList = recipeList;
     newList = currentList.filter(item => {
-      const listItem = item.toLowerCase();
-      const searchTerm = evt.target.value.toLowerCase();
+      let listItem = item.title.toLowerCase();
       return listItem.includes(searchTerm);
-    })
-    else( newList = recipeList );
-    
+    });
+  }else {
+      newList = recipeList; 
+  };
     setFilteredList(newList);
-  }
-}
+  }, [searchTerm, recipeList])
+
+  console.log(filteredList)
   return (
     <>
-      <label>
         <input
           type="text"
-          // value=''
+          value={searchTerm}
           placeholder="Search by keyword"
-          // onChange={onRecipeFilterChange}
+          onChange={handleChange}
           className="searchBar"
         />
-      </label>
-      <div className="recipes container">
-          {recipeList.map((item) => {
-          return <RecipeCard editable={false} item={item} key={item.id}/>
-      })}
+      <div className="filteredRecipes container">
+        {filteredList.map((item) => {
+            return <RecipeCard editable={false} item={item} key={item.id}/>
+        })}
       </div>
+ 
     </>
   );
 }
-
