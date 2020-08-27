@@ -44,6 +44,7 @@ export default function AllRecipes(props) {
 
   return (
     <>
+    <div className='searchContainer'>
         <input
           type="text"
           value={searchTerm}
@@ -51,6 +52,7 @@ export default function AllRecipes(props) {
           onChange={handleChange}
           className="searchBar"
         />
+      </div>
       <div className="filteredRecipes container">
         {filteredList.map((item) => {
             return ( 
