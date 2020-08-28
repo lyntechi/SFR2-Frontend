@@ -24,7 +24,7 @@ function RecipeCard(props) {
     ingredients,
     id,
     instructions, 
-  } = (props.ingredients) ? props.item : tempData(); //pass editable as true to have an edit button
+  } = props.item //pass editable as true to have an edit button
   const {editable} = props;
   const [edit, setEdit] = useState(false);
   
@@ -83,7 +83,7 @@ function RecipeCard(props) {
               })}
           </ul>
         </div>
-        <p>instructions{instructions}</p>
+        <p>{instructions}</p>
         {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
         {editable && <button onClick={''} >[delete]</button>}
       </AccordionDetails>
