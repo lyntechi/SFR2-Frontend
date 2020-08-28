@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from './RecipeCard';
-import axios from "axios";
 import { getRecipes } from "../actions/recipesActions";
 import { connect } from "react-redux";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import RecipeForm from './RecipeForm';
 
 

@@ -22,7 +22,6 @@ function RecipeForm(props) {
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState([""]);
   const [disabled, setDisabled] = useState(false);
-  const { setEdit } = props;
 
   function updateFormArray(e, index) {
     const { name, value } = e.target;

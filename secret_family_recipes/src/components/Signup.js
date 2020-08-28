@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { setLoggedIn, setLoggedOut } from "../actions/accountActions";
 import { connect } from "react-redux";
 
@@ -17,11 +17,9 @@ const initialFormErrors = {
   password: "",
 };
 
-const initialUser = [];
 const initialDisabled = true;
 
   function SignupForm(props) {
-  const [users, setUsers] = useState(initialUser);
   const [formValues, setFormValues] = useState(initialFormValues);
   const [errors, setErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -42,10 +40,7 @@ const initialDisabled = true;
       .catch(error=>{
         setLoginExists(true);
       })
-    const newUser = {
-      username: formValues.username.trim(),
-      password: formValues.password.trim(),
-    };
+  
   };
 
   // YUP VALIDATIONS
