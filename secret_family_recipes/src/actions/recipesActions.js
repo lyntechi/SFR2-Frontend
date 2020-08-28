@@ -43,14 +43,20 @@ export const deleteRecipes = (recipeId) => (dispatch) =>
     });
 };
 
-export const editRecipes = (recipe) => (dispatch) => {
+export const editRecipes = ( id, recipeChanges ) => (dispatch) => {
+
+
+  console.log( "IN EDIT" );
   dispatch({ type: MAKING_CHANGES });
   axiosWithAuth()
-    .put(`/api/recipes/${recipe.id}`, recipe)
-    .then((res) => {
-      dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
-    })
-    .catch((err) => {
-      dispatch({ type: LOG_ERROR, payload: err });
-    });
+    .put( `/api/recipes/${ id }`, recipeChanges )
+    .then( res => {
+      dispatch( { type: UPDATE_RECIPES, payload: res.data.data } );
+
+      console.log( "Success" );
+    } )
+    .catch( err => {
+      console.log( "WTF" )
+      dispatch( { type: LOG_ERROR, payload: err } );
+    } );
 };
