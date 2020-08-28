@@ -23,6 +23,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 function RecipeCard(props) 
 {
   let { image_url, title, categories, source, ingredients, id, instructions } =  props.item; //pass editable as true to have an edit button
+
+
   const {editable} = props;
   const [edit, setEdit] = useState(false);
 
@@ -106,9 +108,11 @@ function RecipeCard(props)
               })}
           </ul>
         </div>
+
         <p>instructions{instructions}</p>
         { editable && <Button variant="outlined" color="primary" onClick={ handleClickOpen } > Edit </Button> }
         { editable && <Button variant="outlined" color="primary" onClick={ () => deleteRecipe( id ) } > Delete</Button> }
+
       </AccordionDetails>
     </Accordion>
   </>
