@@ -47,21 +47,6 @@ function RecipeCard(props)
     handleClose(); 
   }
 
-  // if (edit) {
-  //   return (
-  //     <EditForm
-  //       // shared={shared}
-  //       image_url={image_url}
-  //       title={title}
-  //       categories={categories}
-  //       source={source}
-  //       ingredients={ingredients}
-  //       instructions={instructions}
-  //       setEdit={edit}
-  //     />
-  //   );
-  // }
-
   return (
     <>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -123,13 +108,11 @@ function RecipeCard(props)
         </div>
         <p>instructions{instructions}</p>
         { editable && <Button variant="outlined" color="primary" onClick={ handleClickOpen } > Edit </Button> }
-        { editable && <Button variant="outlined" color="primary" onClick={ () => deleteRecipe( id ) } > Delete</Button>}
+        { editable && <Button variant="outlined" color="primary" onClick={ () => deleteRecipe( id ) } > Delete</Button> }
       </AccordionDetails>
     </Accordion>
   </>
   );
 }
 
-export default connect( null, { deleteRecipes, editRecipes })(
-  RecipeCard
-);
+export default connect( null, { deleteRecipes, editRecipes } )( RecipeCard );
