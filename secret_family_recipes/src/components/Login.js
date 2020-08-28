@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import validationSchema from "./validation/validationSchema";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { connect } from "react-redux";
 import { setLoggedIn, setLoggedOut, setUser } from "../actions/accountActions";
 
@@ -51,11 +51,7 @@ useEffect(()=>{
         setDoesntExist(true);
       });
 
-    const userLogin = {
-      username: login.username.trim(),
-      password: login.password.trim(),
-    };
-  };
+    }
 
   // YUP VALIDATIONS
   const inputChange = (evt) => {
