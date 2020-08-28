@@ -19,6 +19,8 @@ const defaultData = {
 };
 
 function RecipeForm(props) {
+
+  console.log( "HERE" );
   const [formData, setFormData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState([""]);
   const [disabled, setDisabled] = useState(false);
