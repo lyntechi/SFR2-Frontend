@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
-
+import {fetchApi} from './fetchApi'
 
 export default function AllRecipes(props) {
   const [recipeList, setRecipeList] = useState([]);
@@ -10,15 +10,15 @@ export default function AllRecipes(props) {
 
   // Getting all public recipe cards
   useEffect( () => {
-    axios
-      .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
-      .then( res => { setRecipeList( res.data.data ); })
+      fetchApi().then( res => { 
+        console.log(res)
+        setRecipeList( res.data.data ); })
       .catch(( err ) => { console.log( err ) } );
   }, []);
 
   const handleChange = evt => { setSearchTerm( evt.target.value.toLowerCase() ) };
 
-  useEffect( () => { setFilteredList( recipeList.filter( recipe => recipe.title.toLowerCase().includes( searchTerm ) ) ) }, [ searchTerm, recipeList ] );
+  // useEffect( () => { setFilteredList( recipeList.filter( recipe => recipe.title.toLowerCase().includes( searchTerm ) ) ) }, [ searchTerm, recipeList ] );
 
   return (
     <>
