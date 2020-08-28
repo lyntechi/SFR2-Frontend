@@ -9,39 +9,16 @@ export default function AllRecipes(props) {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Getting all public recipe cards
-  useEffect(() => {
+  useEffect( () => {
     axios
       .get("https://secret-fam-recipe.herokuapp.com/api/recipes")
-      .then((res) => {
-        setRecipeList(res.data.data);
-        // setFilteredList(res.data.data);
-        // returns array of objects w/recipe data
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then( res => { setRecipeList( res.data.data ); })
+      .catch(( err ) => { console.log( err ) } );
   }, []);
 
+  const handleChange = evt => { setSearchTerm( evt.target.value.toLowerCase() ) };
 
-  const handleChange = (evt) => {
-    setSearchTerm(evt.target.value.toLowerCase());
-  }
-
-  useEffect(()=> {
-  let currentList = [];
-  let newList = [];
-
-  if(searchTerm !== ''){
-    currentList = recipeList;
-    newList = currentList.filter(item => {
-      let listItem = item.title.toLowerCase();
-      return listItem.includes(searchTerm);
-    });
-  }else {
-      newList = recipeList; 
-  };
-    setFilteredList(newList);
-  }, [searchTerm, recipeList])
+  useEffect( () => { setFilteredList( recipeList.filter( recipe => recipe.title.toLowerCase().includes( searchTerm ) ) ) }, [ searchTerm, recipeList ] );
 
   return (
     <>
@@ -64,8 +41,7 @@ export default function AllRecipes(props) {
             />
           );
         })}
-      </div>
- 
+      </div> 
     </>
   );
 }
