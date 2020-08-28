@@ -80,7 +80,6 @@ function RecipeForm(props) {
         })
       })
       .catch((err) => {
-        console.log(err);
         setFormErrors({
           ...formErrors,
           [name]: err.errors[0],

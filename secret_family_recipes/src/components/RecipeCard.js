@@ -16,8 +16,6 @@ import {
 // } from "../actions/recipesActions";
 function RecipeCard(props) {
 
-
-  console.log( "Prrops =>", props );
   let {
     image_url,
     title,
@@ -50,6 +48,11 @@ function RecipeCard(props) {
     props.deleteRecipes( id );
   }
 
+  const editRecipe = id =>
+  {
+    console.log( "Edit =>", id );
+  }
+
 
   if (edit) {
     return (
@@ -61,11 +64,10 @@ function RecipeCard(props) {
         source={source}
         ingredients={ingredients}
         instructions={instructions}
-        setEdit={setEdit}
+        setEdit={edit}
       />
     );
   }
-        console.log('image is ' +image_url);
 
   return (
     <Accordion className="recipe-card">
@@ -92,7 +94,7 @@ function RecipeCard(props) {
           </ul>
         </div>
         <p>instructions{instructions}</p>
-        {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
+        {editable && <button onClick={ () => editRecipe( id ) }>[edit]</button>}
         {editable && <button onClick={ () => deleteRecipe( id ) } >[delete]</button>}
       </AccordionDetails>
     </Accordion>

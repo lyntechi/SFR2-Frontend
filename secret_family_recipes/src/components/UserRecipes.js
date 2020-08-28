@@ -16,7 +16,6 @@ function UserRecipes(props) {
     props.getRecipes(props.user.id);
     
   }, []);
-// console.log('props user',props.user)
 
 const handleChange = (evt) => {
   setSearchTerm(evt.target.value.toLowerCase());
