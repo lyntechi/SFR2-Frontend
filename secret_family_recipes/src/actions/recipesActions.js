@@ -8,7 +8,6 @@ export const getRecipes = (id) => (dispatch) => {
   axiosWithAuth()
     .get(`/api/users/${id}/recipes`)
     .then((res) => {
-      console.log('res',res)
       dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
       
     })
@@ -19,7 +18,6 @@ export const getRecipes = (id) => (dispatch) => {
 
 export const addRecipes = (recipe) => (dispatch) => {
   dispatch({ type: MAKING_CHANGES });
-  console.log("this is res data");
   axiosWithAuth()
     .post("/api/recipes", recipe)
     .then((res) => {
@@ -31,13 +29,14 @@ export const addRecipes = (recipe) => (dispatch) => {
     });
 };
 
-export const deleteRecipes = (recipeId) => (dispatch) => {
+export const deleteRecipes = (recipeId) => (dispatch) => 
+{
   dispatch({ type: MAKING_CHANGES });
   axiosWithAuth()
     .delete(`/api/recipes/${recipeId}`)
     .then((res) => {
-      console.log("response is" + res);
-      //dispatch({ type: UPDATE_RECIPES, payload: res.data.data });
+      console.log(" From Delete Recipes" + res);
+      dispatch({ type:  "DELETE_RECIPE", payload: res.data.data });
     })
     .catch((err) => {
       dispatch({ type: LOG_ERROR, payload: err });

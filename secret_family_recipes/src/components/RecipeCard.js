@@ -16,6 +16,8 @@ import {
 // } from "../actions/recipesActions";
 function RecipeCard(props) {
 
+
+  console.log( "Prrops =>", props );
   let {
     image_url,
     title,
@@ -24,7 +26,7 @@ function RecipeCard(props) {
     ingredients,
     id,
     instructions, 
-  } = (props.ingredients) ? props.item : tempData(); //pass editable as true to have an edit button
+  } =  props.item; //pass editable as true to have an edit button
   const {editable} = props;
   const [edit, setEdit] = useState(false);
   
@@ -43,6 +45,12 @@ function RecipeCard(props) {
   // }
 
   //If edit is true, show RecipeForm with all Values.
+  const deleteRecipe = id =>
+  {
+    props.deleteRecipes( id );
+  }
+
+
   if (edit) {
     return (
       <EditForm
@@ -85,7 +93,7 @@ function RecipeCard(props) {
         </div>
         <p>instructions{instructions}</p>
         {editable && <button onClick={() => setEdit(true)}>[edit]</button>}
-        {editable && <button onClick={''} >[delete]</button>}
+        {editable && <button onClick={ () => deleteRecipe( id ) } >[delete]</button>}
       </AccordionDetails>
     </Accordion>
   );

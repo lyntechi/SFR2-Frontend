@@ -25,7 +25,9 @@ export const recipesReducer = (state = initialState, action) => {
         message: "",
         makingChanges: false,
       };
-      case ADD_RECIPE:
+    case "DELETE_RECIPE":
+      return { ...state, recipes: state.recipes.filter( recipe => recipe.id !== action.payload.id ) };    
+    case ADD_RECIPE:
         return{ 
           ...state,
           recipes: [...state.recipes, action.payload]
